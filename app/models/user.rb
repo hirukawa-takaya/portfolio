@@ -7,4 +7,6 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }#大文字と小文字区別しない
     validates :password, presence:true, length:{minimum:6}
     has_secure_password
+    
+    has_many :topics
 end

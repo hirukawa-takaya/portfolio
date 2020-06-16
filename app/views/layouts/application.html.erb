@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <meta charset="utf-8">
-  <title>Bolt - Bootstrap Agency Template</title>
+  <title>portfolio</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -47,7 +47,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        <a class="navbar-brand" href="#"><i class="fa fa-bolt"></i></a>
+        <a class="navbar-brand" href="/"><i class="fas fa-key"></i></a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -55,14 +55,14 @@
           <!--ログイン済-->
           <% if logged_in? %>
           <li><%= link_to "ホーム", root_path %></li>
-          <li><%= link_to "新規投稿", "#" %></li>
-          <li><%= link_to "投稿一覧", "#" %></li>
+          <li><%= link_to "新規投稿", new_topic_path %></li>
+          <li><%= link_to "投稿一覧", topics_path %></li>
           <li><%= link_to "マイページ", "#" %></li>
           <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
           <!-- 未ログイン-->
           <% else %>
           <li><%= link_to "ホーム", root_path %></li>
-          <li><%= link_to "投稿一覧", "#" %></li>
+          <li><%= link_to "投稿一覧", topics_path %></li>
           <li><%= link_to "サインアップ", new_user_path %></li>
           <li><%= link_to "ログイン", login_path %></li>
           <% end %>

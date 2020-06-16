@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Portfolio
   class Application < Rails::Application
+      # carrierwave
+      config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
