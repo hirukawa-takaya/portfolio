@@ -6,5 +6,9 @@ class Topic < ApplicationRecord
     
     # carrierwave
     mount_uploader :image_path, ImageUploader
+    
+    has_many :likes
+    has_many :like_users, through: :likes, source: 'user'
+
 
 end

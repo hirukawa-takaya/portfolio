@@ -9,4 +9,7 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :topics
+    has_many :likes
+    has_many :like_topics, through: :likes, source: 'topic'
+
 end

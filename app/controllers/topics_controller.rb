@@ -1,6 +1,12 @@
 class TopicsController < ApplicationController
+  
   def new
     @topic = Topic.new
+    @like = Like.new
+  end
+  
+  def index
+   @topics = Topic.all.includes(:like_users)
   end
 
   def create
@@ -14,10 +20,6 @@ class TopicsController < ApplicationController
     end
   end
   
-  def index
-    @topics = Topic.all
-  end
-
   private
   def topic_params
     params.require(:topic).permit(:image_path, :description)

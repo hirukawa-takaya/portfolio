@@ -1,0 +1,25 @@
+<div class="topic-index-wrapper">
+  <div class="container">
+    <% @like_topics.each do |topic| %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="topic-index-single">
+            <h2 class="topic-author">
+              <%= topic.user.name %>
+            </h2>
+            <% if topic.image_path.url %>
+              <%= image_tag topic.image_path.url %>
+            <% end %>
+            <%#= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
+            <div class='like-btn' >
+              <i class="far fa-comment-dots"></i>
+            </div>
+            <p class="topic-text">
+              <%= topic.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
