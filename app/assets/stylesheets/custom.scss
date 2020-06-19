@@ -356,7 +356,7 @@ hr {
   height: 100vh;
 
   .users-new-container {
-    padding-top: 220px;
+    padding-top: 80px;
 
     .form-group {
       margin-bottom: 20px;
@@ -455,3 +455,19 @@ hr {
  color: #e54747;
  margin-left: 20px;
  }
+ 
+// errors
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
