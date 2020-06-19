@@ -10,10 +10,9 @@
             <% if topic.image_path.url %>
               <%= image_tag topic.image_path.url %>
             <% end %>
-            <%#= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
-            <div class='like-btn' >
-              <i class="far fa-comment-dots"></i>
-            </div>
+            <i class="far fa-comment-dots like-btn"></i>
+            <i class="fas fa-heart unlike-btn"></i>
+            <%= topic.like_users.count %>
             <p class="topic-text">
               <%= topic.description %>
             </p>
