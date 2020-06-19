@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
   end
   
   def index
-   @topics = Topic.all.includes(:like_users)
+   @topics = Topic.all.includes(:like_users).page(params[:page]).per(8)
   end
 
   def create

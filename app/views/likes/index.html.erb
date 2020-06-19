@@ -11,7 +11,15 @@
               <%= image_tag topic.image_path.url %>
             <% end %>
             <i class="far fa-comment-dots like-btn"></i>
-            <i class="fas fa-heart unlike-btn"></i>
+            <% if !topic.like_users.include?(current_user) %>
+              <%= link_to likes_path(topic_id: topic.id), method: :post do %>
+                <i class="far fa-heart like-btn" ></i>
+              <% end %>
+            <% else %>
+              <%= link_to likes_path(topic_id: topic.id), method: :delete do %>
+                <i class="fas fa-heart unlike-btn"></i>
+              <% end %>
+            <% end %>
             <%= topic.like_users.count %>
             <p class="topic-text">
               <%= topic.description %>
@@ -20,5 +28,8 @@
         </div>
       </div>
     <% end %>
+    <div class="text-center">
+      <%= paginate @like_topics %>
+    </div>
   </div>
 </div>

@@ -69,3 +69,4 @@ gem 'bcrypt'
 gem 'jquery-rails'
 gem "carrierwave"
 gem 'font-awesome-sass'
+gem 'kaminari'

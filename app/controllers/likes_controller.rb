@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
     
 def index
-  @like_topics = current_user.like_topics
+  @like_topics = current_user.like_topics.page(params[:page]).per(8)
 end
     
 def create
