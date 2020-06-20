@@ -10,16 +10,25 @@
                   <%= image_tag @topic.image_path.url %>
               <% end %>
               <i class="far fa-comment-dots like-btn"></i>
-              <% if !@topic.like_users.include?(current_user) %>
-                <%= link_to likes_path(topic_id: @topic.id), method: :post do %>
-                  <i class="far fa-heart like-btn" ></i>
+              <% if logged_in? %>
+                <% if !@topic.like_users.include?(current_user) %>
+                  <%= link_to likes_path(topic_id: @topic.id), method: :post do %>
+                    <i class="far fa-heart like-btn" ></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to likes_path(topic_id: @topic.id), method: :delete do %>
+                    <i class="fas fa-heart unlike-btn"></i>
+                  <% end %>
                 <% end %>
+                <%= @topic.like_users.count %>
               <% else %>
-                <%= link_to likes_path(topic_id: @topic.id), method: :delete do %>
+              <% if !@topic.like_users.include?(current_user) %>
+                  <i class="far fa-heart like-btn" ></i>
+              <% else %>
                   <i class="fas fa-heart unlike-btn"></i>
-                <% end %>
               <% end %>
               <%= @topic.like_users.count %>
+              <% end %>
               <p class="topic-text">
                   <%= @topic.description %>
                 </p>
