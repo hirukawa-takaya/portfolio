@@ -14,6 +14,12 @@
             <%= f.text_area :description, class: 'form-control' %>
           </div>
 
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.text_field :password, class: 'form-control' %>
+            <%= link_to "パスワードとは？", "#" %>
+          </div>
+
           <%= f.submit '投稿', class: 'btn btn-black btn-block' %>
 
         <% end %>

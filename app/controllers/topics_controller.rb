@@ -1,5 +1,9 @@
 class TopicsController < ApplicationController
   
+  def show
+    @topic = Topic.find(params[:id])
+  end
+  
   def new
     @topic = Topic.new
     @like = Like.new
@@ -22,6 +26,7 @@ class TopicsController < ApplicationController
   
   private
   def topic_params
-    params.require(:topic).permit(:image_path, :description)
+    params.require(:topic).permit(:image_path, :description, :password)
   end
+  
 end

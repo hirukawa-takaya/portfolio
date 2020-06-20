@@ -1,0 +1,2 @@
+module TopicPasswordsHelper
+end
