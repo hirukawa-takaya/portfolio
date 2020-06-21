@@ -38,8 +38,12 @@
             <%= @topic.description %>
           </p>
 
+          <div class="text-left" >
+            <%= l @topic.created_at %><br>
+          </div>
+          
           <div class="text-right" >
-            <%= l @topic.created_at %>
+            <%= link_to '削除', "#{@topic.id}/destroy", method: :delete %>
           </div>
 
         </div>
