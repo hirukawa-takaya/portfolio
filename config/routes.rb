@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  get  'topic_passwords', to: 'topic_passwords#new'
-  post 'topic_passwords', to: 'topic_passwords#create'
-
-  root 'home#top'
-  get '/index', to:'home#index'
+  
+  root      'home#top'
+  get       '/index',      to:'home#index'
   
   resources :users
   
-  get    '/login',  to: 'sessions#new'
-  post   '/login',  to: 'sessions#create'
-  delete '/logout', to: "sessions#destroy"
+  get       '/login',      to: 'sessions#new'
+  post      '/login',      to: 'sessions#create'
+  delete    '/logout',     to: "sessions#destroy"
   
+  get       'topic_password/:id', to: 'topics#topic_password'
+  post      'topic_password/:id', to: 'topics#authenticate'
   resources :topics
   
-  get 'likes/index'
-  post '/likes', to: 'likes#create'
-  delete '/likes', to: 'likes#destroy'
+  get       'likes/index'
+  post      '/likes',      to: 'likes#create'
+  delete    '/likes',      to: 'likes#destroy'
   
 end

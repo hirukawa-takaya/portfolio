@@ -10,7 +10,8 @@ class Topic < ApplicationRecord
     has_many :likes
     has_many :like_users, through: :likes, source: 'user'
     
-    has_secure_password
+    # presence:trueを無効
+    has_secure_password(validations: false)
 
 
 end
