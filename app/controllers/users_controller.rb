@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @user_topics = Topic.where(user_id: @user).count
+    @user_likes =  Like.where(user_id: @user).count
   end
   
   def new

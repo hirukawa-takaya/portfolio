@@ -7,9 +7,8 @@ class TopicsController < ApplicationController
   
   def create
     @topic = current_user.topics.new(topic_params)
-
     if @topic.save
-      redirect_to topics_path, success: '投稿に成功しました'
+      redirect_to topics_path, success: '投稿しました'
     else
       flash.now[:danger] = '投稿に失敗しました'
       render :new
@@ -28,7 +27,7 @@ class TopicsController < ApplicationController
     if topic_id && topic_id.authenticate(params[:topic][:password])
       redirect_to topic_path(topic_id), success: '成功'
     else
-      flash.now[:danger] = '失敗'
+      flash.now[:danger] = '正しいパスワードを入力してください'
       render 'topic_password'
     end
   end
@@ -45,13 +44,7 @@ class TopicsController < ApplicationController
 
   private
   def topic_params
-    params.require(:topic).permit(:image_path, :description, :password, :password_confirmation)
+    params.require(:topic).permit(:image_path, :description, :password)
   end
 
 end
-
-# 投稿時にパスワードの設定が可能
-# パスワードの有無を確認
-# パスワードがなければ直接show
-# パスワードがあればpass→show
-# passでは前のリンクのパラメータを引継ぎパスワードを入力のみ
