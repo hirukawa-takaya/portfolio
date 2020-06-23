@@ -12,18 +12,13 @@
             <%= image_tag @topic.image_path.url %>
           <% end %>
  
-          <i class="far fa-comment-dots like-btn"></i>
-
-            <% if !@topic.like_users.include?(current_user) %>
-              <%= link_to likes_path(topic_id: @topic.id), method: :post, remote: true do %>
-                <i class="far fa-heart like-btn" ></i>
-              <% end %>
-            <% else %>
-              <%= link_to likes_path(topic_id: @topic.id), method: :delete, remote: true do %>
-                <i class="fas fa-heart unlike-btn"></i>
-              <% end %>
-            <% end %>
-            <%= @topic.like_users.count %>
+            <div id="likes_buttons_<%= @topic.id %>">
+              <ul class="comments-likes">
+                <li><i class="far fa-comment-dots like-btn"></i></li>
+                <li><%= render partial: 'likes/like_for_show', locals: { topic: @topic} %></li>
+                <li><%= @topic.like_users.count %></li>
+              </ul>
+            </div>
 
           <p class="topic-text">
             <%= @topic.description %>

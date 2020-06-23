@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
-  
-  def show
-    @user = User.find(params[:id])
-    @user_topics = Topic.where(user_id: @user).count
-    @user_likes =  Like.where(user_id: @user).count
-  end
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
   
   def new
     @user = User.new
@@ -21,13 +17,45 @@ class UsersController < ApplicationController
     end
   end
   
+  def show
+    @user = User.find(params[:id])
+    @user_topics = Topic.where(user_id: @user).count
+    @user_likes =  Like.where(user_id: @user).count
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "更新しました"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+  
   
   private
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-  
-  def log_in(user)
-    session[:user_id] = user.id
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+    
+    def log_in(user)
+      session[:user_id] = user.id
+    end
+    
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください"
+        redirect_to login_url
+      end
+    end
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
+    end
 end
