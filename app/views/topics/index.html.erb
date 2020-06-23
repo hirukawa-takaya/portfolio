@@ -25,17 +25,16 @@
               <% end %>
             </div>
 
-              <div id="likes_buttons_<%= topic.id %>">
                 <ul class="comments-likes">
                   <% if logged_in? %>
-                  <li><i class="far fa-comment-dots like-btn"></i></li>
-                  <li><%= render partial: 'like', locals: { topic: topic} %></li>
-                  <li><%= topic.like_users.count %></li>
-              </div>
+                    <%= link_to topic_path(topic) do %>
+                      <li><i class="far fa-comment-dots like-btn"></i></li>
+                    <% end %>
+                    <li id="likes_buttons_<%= topic.id %>"><%= render partial: 'like', locals: { topic: topic} %></li>
                   <% else %>
-                  <li><i class="far fa-heart like-btn" ></i></li>
-                  <li><%= topic.like_users.count %></li>
-                <% end %>
+                    <li><i class="far fa-heart like-btn" ></i></li>
+                    <li><%= topic.like_users.count %></li>
+                  <% end %>
                 </ul>
 
             <div class="descript">

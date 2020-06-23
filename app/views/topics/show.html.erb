@@ -12,13 +12,10 @@
             <%= image_tag @topic.image_path.url %>
           <% end %>
  
-            <div id="likes_buttons_<%= @topic.id %>">
               <ul class="comments-likes">
                 <li><i class="far fa-comment-dots like-btn"></i></li>
-                <li><%= render partial: 'likes/like_for_show', locals: { topic: @topic} %></li>
-                <li><%= @topic.like_users.count %></li>
+                <li id="likes_buttons_<%= @topic.id %>"><%= render partial: 'likes/like_for_show', locals: { topic: @topic} %></li>
               </ul>
-            </div>
 
           <p class="topic-text">
             <%= @topic.description %>
@@ -35,6 +32,16 @@
             </div>
             <% end %>
           <% end %>
+
+<% @comments.each do |c| %>
+    <%= c.content %>
+<% end %>
+
+<%= form_for [@topic, @comment] do |f| %>
+  <%= f.text_field :content %>
+  <br>
+  <%= f.submit 'コメントする' %>
+<% end %>
 
         </div>
       </div>

@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   post      '/likes',      to: 'likes#create'
   delete    '/likes',      to: 'likes#destroy'
   
+  resources :topics do
+    resources :comments, only: [:create]
+  end
 end

@@ -12,6 +12,8 @@ class Topic < ApplicationRecord
     
     # presence:trueを無効
     has_secure_password(validations: false)
+    
+    has_many :comments
 
 
 end
