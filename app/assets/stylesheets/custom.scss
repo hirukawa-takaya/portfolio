@@ -424,6 +424,7 @@ hr {
     }
 
     .topic-text {
+      clear: both;
       padding-right: 20px;
       padding-left: 20px;
     }
@@ -460,6 +461,32 @@ hr {
  margin-left: 20px;
  }
  
+// .comment {
+//   display: inline-block;
+//   width: 20px;
+//   height: 20px;
+// }
+
+// .like {
+//   display: inline-block;
+//   width: 20px;
+//   height: 20px;
+// }
+
+// .count-of-like {
+//   display: inline-block;
+//   width: 20px;
+//   height: 20px;
+// }
+
+.comments-likes {
+  padding-left: 0;
+  li {
+    float: left;
+    list-style: none;
+  }
+}
+ 
 // errors
 #error_explanation {
   color: red;
@@ -474,6 +501,10 @@ hr {
   .form-control {
     color: $state-danger-text;
   }
+}
+
+.comments-likes{
+  float: left;
 }
 
 // paginate

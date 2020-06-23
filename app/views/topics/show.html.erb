@@ -14,25 +14,16 @@
  
           <i class="far fa-comment-dots like-btn"></i>
 
-          <% if logged_in? %>
             <% if !@topic.like_users.include?(current_user) %>
-              <%= link_to likes_path(topic_id: @topic.id), method: :post do %>
+              <%= link_to likes_path(topic_id: @topic.id), method: :post, remote: true do %>
                 <i class="far fa-heart like-btn" ></i>
               <% end %>
             <% else %>
-              <%= link_to likes_path(topic_id: @topic.id), method: :delete do %>
+              <%= link_to likes_path(topic_id: @topic.id), method: :delete, remote: true do %>
                 <i class="fas fa-heart unlike-btn"></i>
               <% end %>
             <% end %>
             <%= @topic.like_users.count %>
-          <% else %>
-            <% if !@topic.like_users.include?(current_user) %>
-              <i class="far fa-heart like-btn" ></i>
-            <% else %>
-              <i class="fas fa-heart unlike-btn"></i>
-            <% end %>
-            <%= @topic.like_users.count %>
-          <% end %>
 
           <p class="topic-text">
             <%= @topic.description %>
@@ -41,11 +32,13 @@
           <div class="text-left" >
             <%= l @topic.created_at %><br>
           </div>
-          
-          <% if @topic.user_id == current_user.id %>
-          <div class="text-right" >
-            <%= link_to '削除', "#{@topic.id}/destroy", method: :delete %>
-          </div>
+
+          <% if logged_in? %>
+            <% if @topic.user_id == current_user.id %>
+            <div class="text-right" >
+              <%= link_to '削除', "#{@topic.id}/destroy", method: :delete %>
+            </div>
+            <% end %>
           <% end %>
 
         </div>
