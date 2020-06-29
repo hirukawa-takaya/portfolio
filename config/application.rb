@@ -11,8 +11,8 @@ module Portfolio
     #kaminari japanise
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-      # carrierwave
-      config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
+    # carrierwave
+    config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     
@@ -20,6 +20,14 @@ module Portfolio
     config.time_zone = 'Asia/Tokyo'
     # デフォルトのロケールを日本（ja）に設定
     config.i18n.default_locale = :ja
+    
+    #rspec
+    config.generators do |g|
+      g.test_framework :rspec,
+      view_specs: false,
+      helper_specs: false,
+      routing_specs: false
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

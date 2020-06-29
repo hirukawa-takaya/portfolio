@@ -39,6 +39,9 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.6'
+  gem 'spring-commands-rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -70,3 +73,4 @@ gem 'jquery-rails'
 gem "carrierwave"
 gem 'font-awesome-sass'
 gem 'kaminari'
+gem 'rails-i18n'

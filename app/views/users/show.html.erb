@@ -8,19 +8,66 @@
     </div>
     <!-- Content-->
     <div class="card-content">
-      <div class="card-content__username"><%= @user.name %></div>
+      <div class="card-content__username"><%= link_to @user.name, edit_user_path %></div>
     </div>
     <!-- Footer-->
     <div class="card-footer">
-      <div class="card-footer__pens"> <span><%= @user_topics %></span>
-        <div class="label">Topics</div>
+
+      <div class="card-footer__pens"> 
+        <a href="#fuu" class='secList'>
+          <div class="et_pb_module">
+            <%= @user_topics %>
+            <div class="label">Topics</div>
+          </div>
+        </a>
       </div>
-      <div class="card-footer__followers"> <span><%= @user_likes %></span>
-        <div class="label">Likes</div>
+
+      <div class="card-footer__followers">
+         <a href="#euu" class='secList'>
+           <div class="et_pb_module">
+              <%= @user_likes %>
+              <div class="label">Likes</div>
+            </div>
+          </a>
       </div>
-      <div class="card-footer__following"> <span>0</span>
-        <div class="label">comment</div>
-      </div>
+
     </div>
   </div>
 </div>
+
+<div class="mypage-footer">
+  <div id="fuu" class="section">
+    <div class="et_pb_text_inner1">
+      <%= render 'my_topics' %>
+    </div>  
+  </div>
+  
+  <div id="euu" class="section">
+    <div class="et_pb_text_inner2">
+      <%= render 'my_likes' %>
+    </div>
+  </div>
+  
+  </div>
+  
+  <div id="guu" class="section">
+    <div class="et_pb_text_inner3">
+      <%= link_to "#" %>
+    </div>  
+  </div>
+</div>
+
+<script>
+$(function(){
+  $('.section').hide();
+  
+  $('.secList').on('click',function(){   
+    $('.section').not($($(this).attr('href'))).hide();
+    <!--// フェードイン・アウトのアニメーション付で、表示・非表示を交互に実行-->
+    $($(this).attr('href')).fadeToggle(0);
+    
+    <!--// show を使うと、表示するだけ （ 同じボタンを何回押しても変わらない ）-->
+    <!--// $($(this).attr('href')).show();-->
+  });
+});
+</script>

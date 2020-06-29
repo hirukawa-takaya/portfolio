@@ -1,4 +1,6 @@
 class TopicsController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :destroy]
+  before_action :correct_user  , only: :destroy
   
   def new
     @topic = Topic.new
@@ -17,6 +19,7 @@ class TopicsController < ApplicationController
   
   def index
     @topics = Topic.all.includes(:like_users).page(params[:page]).per(8)
+    @user = Topic.find_by(user_id: params[:user_id])
   end
   
   def topic_password
@@ -47,6 +50,11 @@ class TopicsController < ApplicationController
   private
   def topic_params
     params.require(:topic).permit(:image_path, :description, :password)
+  end
+  
+  def correct_user
+    @topic = current_user.topics.find_by(id: params[:id])
+    redirect_to root_url if @topic.nil?
   end
 
 end

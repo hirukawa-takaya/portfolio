@@ -627,7 +627,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
     background: #F3F3F3;
     padding: 15px 40px;
     color: $dark-gray;
@@ -661,4 +661,8 @@ body {
     color: $dark-gray;
     font-weight: 600;
   }
+}
+
+.mypage-footer{
+  padding-top: 70px;
 }

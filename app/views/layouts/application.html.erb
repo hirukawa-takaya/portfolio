@@ -22,5 +22,14 @@
       });
     </script>
     
+    <script>
+(function() {
+  this.App || (this.App = {});
+
+  App.cable = ActionCable.createConsumer();
+
+}).call(this);
+</script>
+    
   </body>
 </html>

@@ -12,5 +12,22 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?
   end
-
+  
+  def log_in(user)
+      session[:user_id] = user.id
+  end
+    
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "ログインしてください"
+      redirect_to login_url
+    end
+  end
+  
+  def log_out_user
+    if logged_in?
+      flash[:danger] = "ログイン済です"
+      redirect_to root_path
+    end
+  end
 end

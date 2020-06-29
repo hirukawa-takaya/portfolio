@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  before_action :logged_in_user, only: :destroy
+  before_action :log_out_user,   only: :create
+  
   def new
   end
   
@@ -19,13 +22,13 @@ class SessionsController < ApplicationController
   end
   
   private
-  def log_in(user)
-        session[:user_id] = user.id
-  end
-  
-  def log_out
-    session.delete(:user_id)
-    @current_user = nil
-  end
+    def log_in(user)
+      session[:user_id] = user.id
+    end
+    
+    def log_out
+      session.delete(:user_id)
+      @current_user = nil
+    end
   
 end
