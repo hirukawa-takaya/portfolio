@@ -1,6 +1,8 @@
 class TopicsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :destroy]
-  before_action :correct_user  , only: :destroy
+  before_action :logged_in_user   , only: [:new, :create, :destroy]
+  before_action :correct_user     , only: :destroy
+  before_action :with_password    , only: :show
+  before_action :without_password , only: :topic_password
   
   def new
     @topic = Topic.new
@@ -55,6 +57,20 @@ class TopicsController < ApplicationController
   def correct_user
     @topic = current_user.topics.find_by(id: params[:id])
     redirect_to root_url if @topic.nil?
+  end
+  
+  def with_password
+    @topic = Topic.find(params[:id])
+    unless @topic.password_digest.nil?
+      redirect_to "/topic_password/#{@topic.id}"
+    end
+  end
+  
+  def without_password
+    @topic = Topic.find(params[:id])
+    if @topic.password_digest.nil?
+      redirect_to topics_path
+    end
   end
 
 end

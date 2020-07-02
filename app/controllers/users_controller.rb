@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :log_out_user,   only: [:create]
+  before_action :log_out_user,   only: [:new, :create]
   
   def new
     @user = User.new
@@ -23,9 +23,7 @@ class UsersController < ApplicationController
     @user_topics = Topic.where(user_id: @user).count
     @user_likes =  Like.where(user_id: @user).count
     @my_topics = current_user.topics.all
-    # @topics = Topic.all.includes(:like_users).page(params[:page]).per(8)
     @likes = current_user.like_topics
-    # @comments = current_user.comments.all
   end
   
   def edit
