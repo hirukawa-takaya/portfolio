@@ -62,7 +62,7 @@ class TopicsController < ApplicationController
   def with_password
     @topic = Topic.find(params[:id])
     unless @topic.password_digest.nil?
-      redirect_to "/topic_password/#{@topic.id}"
+      redirect_to "/topic_password/#{@topic.id}", danger: 'パスワードを入力してください'
     end
   end
   
