@@ -51,7 +51,7 @@ class TopicsController < ApplicationController
 
   private
   def topic_params
-    params.require(:topic).permit(:image_path, :description, :password)
+    params.require(:topic).permit(:image, :description, :password)
   end
   
   def correct_user

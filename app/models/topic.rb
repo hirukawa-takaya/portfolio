@@ -12,6 +12,6 @@ class Topic < ApplicationRecord
   # presence:trueを無効
   has_secure_password(validations: false)
   
-  has_one_attached :image_path
+  has_one_attached :image
 
 end

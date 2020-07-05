@@ -5,11 +5,11 @@
         <div class="topic-index-single">
 
           <h2 class="topic-author">
-            <%= @topic.user.name %>
+            <%= link_to @topic.user.name, user_path(@topic.user.id) %>
           </h2>
 
-          <% if @topic.image_path.url %>
-            <%= image_tag @topic.image_path.url %>
+          <% if @topic.image %>
+            <%= image_tag @topic.image %>
           <% end %>
  
               <ul class="comments-likes">
