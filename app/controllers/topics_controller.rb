@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :logged_in_user   , only: [:new, :create, :destroy]
   before_action :correct_user     , only: :destroy
-  before_action :with_password    , only: :show
+  # before_action :with_password    , only: :show
   before_action :without_password , only: :topic_password
   
   def new

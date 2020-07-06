@@ -8,7 +8,7 @@
             <%= link_to @topic.user.name, user_path(@topic.user.id) %>
           </h2>
 
-          <% if @topic.image %>
+          <% if @topic.image.attached? %>
             <%= image_tag @topic.image %>
           <% end %>
  

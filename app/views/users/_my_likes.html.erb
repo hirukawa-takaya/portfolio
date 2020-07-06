@@ -6,7 +6,7 @@
           <div class="topic-index-single">
 
             <h2 class="topic-author">
-              <%= topic.user.name %>
+              <%= link_to topic.user.name, user_path(topic.user.id) %>
             </h2>
 
             <div class="descript">
