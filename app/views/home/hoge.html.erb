@@ -1,0 +1,68 @@
+<div class="topic-index-wrapper">
+  <div class="container">
+
+    <% @topics.first(3).each do |topic| %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="topic-index-single">
+
+            <h2 class="topic-author">
+              <%= link_to topic.user.name, user_path(topic.user.id) %>
+            </h2>
+
+            <div class="descript">
+              <% if topic.password_digest.nil? %>
+                <% if topic.image.attached? %>
+                  <%= link_to topic_path(topic) do %>
+                    <%= image_tag topic.image %>
+                  <% end %>
+                <% end %>
+
+              <% else %>
+
+                <%= link_to "/topic_password/#{topic.id}", id: topic.id do %>
+                  <%= image_tag "password.jpg" %>
+                <% end %>
+              <% end %>
+            </div>
+
+                <ul class="comments-likes">
+                  <% if logged_in? %>
+                    <%= link_to topic_path(topic) do %>
+                      <li><i class="far fa-comment-dots like-btn"></i></li>
+                    <% end %>
+                    <li id="likes_buttons_<%= topic.id %>"><%= render partial: 'likes/like', locals: { topic: topic} %></li>
+                  <% else %>
+                    <%= link_to topic_path(topic) do %>
+                      <li><i class="far fa-comment-dots like-btn"></i></li>
+                    <% end %>
+                    <li><i class="far fa-heart like-btn" ></i></li>
+                    <li><%= topic.like_users.count %></li>
+                  <% end %>
+                </ul>
+
+            <div class="descript">
+              <%= link_to topic_path(topic) do %>
+                <% if topic.password_digest.nil? %>
+                  <p class="topic-text">
+                    <%= topic.description %>
+                  </p>
+                <% else %>
+                  <p class="topic-text">
+                    <%= link_to "secret", "/topic_password/#{topic.id}", id: topic.id %>
+                  </p>
+                <% end %>
+
+                <div class="text-right" >
+                  <%= l topic.created_at %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

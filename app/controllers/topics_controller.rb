@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
   end
   
   def index
-    @topics = Topic.all.includes(:like_users).page(params[:page]).per(8).order("created_at DESC").order(params[:change])
+    @topics = Topic.all.includes(:like_users).page(params[:page]).per(8).order("created_at DESC")
     @user = Topic.find_by(user_id: params[:user_id])
   end
   
