@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :logged_in_user   , only: [:new, :create, :destroy]
   before_action :correct_user     , only: :destroy
-  # before_action :with_password    , only: :show
+  before_action :with_password    , only: :show
   before_action :without_password , only: :topic_password
   
   def new
@@ -30,7 +30,7 @@ class TopicsController < ApplicationController
   def authenticate
     topic_id = Topic.find(params[:id])
     if topic_id && topic_id.authenticate(params[:topic][:password])
-      redirect_to topic_path(topic_id), success: '成功'
+      redirect_to topic_path(topic_id, password: topic_params), success: '成功'
     else
       flash.now[:danger] = '正しいパスワードを入力してください'
       render 'topic_password'
@@ -60,8 +60,9 @@ class TopicsController < ApplicationController
   end
   
   def with_password
+    url = request.url
     @topic = Topic.find(params[:id])
-    unless @topic.password_digest.nil?
+    if !@topic.password_digest.nil? && !url.include?("password")
       redirect_to "/topic_password/#{@topic.id}", danger: 'パスワードを入力してください'
     end
   end
