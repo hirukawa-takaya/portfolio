@@ -1,5 +1,6 @@
 <div class="topic-index-wrapper">
   <div class="container">
+
     <% @topics.each do |topic| %>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -12,7 +13,7 @@
             <div class="descript">
               <% if topic.password_digest.nil? %>
                 <% if topic.image.attached? %>
-                  <%= link_to topic_path(topic), password_digest: 1 do %>
+                  <%= link_to topic_path(topic) do %>
                     <%= image_tag topic.image %>
                   <% end %>
                 <% end %>
