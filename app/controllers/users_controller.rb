@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_topics = Topic.where(user_id: @user).count
     @user_likes =  Like.where(user_id: @user).count
-    @my_topics = current_user.topics.all
+    @my_topics = @user.topics.all
     @likes = current_user.like_topics
   end
   
