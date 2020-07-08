@@ -77,7 +77,7 @@ Backtrace:
 /home/ec2-user/.rvm/gems/ruby-2.6.3/bin/ruby_executable_hooks:24:in `eval'
 /home/ec2-user/.rvm/gems/ruby-2.6.3/bin/ruby_executable_hooks:24:in `<main>'
 */
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined variable: \"$state-danger-text\".\A         on line 498 of /home/ec2-user/environment/portfolio/app/assets/stylesheets/custom.scss\A \A 493: }\A 494: \A 495: .field_with_errors {\A 496:   @extend .has-error;\A 497:   .form-control {\A 498:     color: $state-danger-text;\A 499:   }\A 500: }\A 501: \A 502: .comments-likes{\A 503:   float: left;"; }
+/*body:before {*/
+/*  white-space: pre;*/
+/*  font-family: monospace;*/
+/*  content: "Error: Undefined variable: \"$state-danger-text\".\A         on line 498 of /home/ec2-user/environment/portfolio/app/assets/stylesheets/custom.scss\A \A 493: }\A 494: \A 495: .field_with_errors {\A 496:   @extend .has-error;\A 497:   .form-control {\A 498:     color: $state-danger-text;\A 499:   }\A 500: }\A 501: \A 502: .comments-likes{\A 503:   float: left;"; }*/

@@ -12,13 +12,12 @@ Rails.application.routes.draw do
   get       'topic_password/:id', to: 'topics#topic_password'
   post      'topic_password/:id', to: 'topics#authenticate'
   delete    'topics/:id/destroy', to: 'topics#destroy'
-  resources :topics
   
   get       'likes/index'
   post      '/likes',      to: 'likes#create'
   delete    '/likes',      to: 'likes#destroy'
   
   resources :topics do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
 end
