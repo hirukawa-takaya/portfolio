@@ -12,5 +12,6 @@ class User < ApplicationRecord
     has_many :likes
     has_many :like_topics, through: :likes, source: 'topic'
     has_many :comments
+    has_many :comment_topics, through: :comments, source: 'topic'
 
 end

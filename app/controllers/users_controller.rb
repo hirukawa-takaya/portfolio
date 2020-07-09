@@ -19,11 +19,13 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
-    @user_topics = Topic.where(user_id: @user).count
-    @user_likes =  Like.where(user_id: @user).count
-    @my_topics = @user.topics.all
-    @likes = current_user.like_topics
+    @user          = User.find(params[:id])
+    @user_topics   = Topic.where(user_id: @user).count
+    @user_likes    = Like.where(user_id: @user).count
+    @user_comments = Comment.where(user_id: @user).count
+    @my_topics     = @user.topics.all
+    @my_likes      = @user.like_topics
+    @my_comments   = @user.comment_topics
   end
   
   def edit

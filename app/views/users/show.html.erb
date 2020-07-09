@@ -1,19 +1,17 @@
-<!-- Username-->
 <div class="container">
-  <!-- User Card-->
   <div class="card">
-    <!-- Header -->
     <div class="card-header">
-      <div class="card-header__avatar"><%= image_tag 'person.png', class:"avatar_img" %></div><a class="card-header__follow" href="#">Follow</a>
+      <div class="card-header__avatar"><%= image_tag 'person.png', class:"avatar_img" %></div>
+      <!--follow-->
+      <!--<a class="card-header__follow" href="#">Follow</a>-->
     </div>
-    <!-- Content-->
+
     <div class="card-content">
       <div class="card-content__username"><%= link_to @user.name, edit_user_path %></div>
     </div>
-    <!-- Footer-->
-    <div class="card-footer">
 
-      <div class="card-footer__pens"> 
+    <div class="card-footer">
+      <div class="card-footer__topics"> 
         <a href="#fuu" class='secList'>
           <div class="et_pb_module">
             <%= @user_topics %>
@@ -22,13 +20,22 @@
         </a>
       </div>
 
-      <div class="card-footer__followers">
+      <div class="card-footer__likes">
          <a href="#euu" class='secList'>
            <div class="et_pb_module">
               <%= @user_likes %>
               <div class="label">Likes</div>
             </div>
           </a>
+      </div>
+      
+      <div class="card-footer__comments">
+        <a href="#guu" class='secList'>
+          <div class="et_pb_module">
+            <%= @user_comments %>
+            <div class="label">Comments</div>
+          </div>
+        </a>
       </div>
 
     </div>
@@ -48,13 +55,13 @@
     </div>
   </div>
   
-  </div>
-  
   <div id="guu" class="section">
     <div class="et_pb_text_inner3">
-      <%= link_to "#" %>
+      <%= render "my_comments" %>
     </div>  
   </div>
+</div>
+  
 </div>
 
 <script>
@@ -63,11 +70,11 @@ $(function(){
   
   $('.secList').on('click',function(){   
     $('.section').not($($(this).attr('href'))).hide();
-    <!--// フェードイン・アウトのアニメーション付で、表示・非表示を交互に実行-->
+    // フェードイン・アウトのアニメーション付で、表示・非表示を交互に実行
     $($(this).attr('href')).fadeToggle(0);
     
-    <!--// show を使うと、表示するだけ （ 同じボタンを何回押しても変わらない ）-->
-    <!--// $($(this).attr('href')).show();-->
+    // show を使うと、表示するだけ （ 同じボタンを何回押しても変わらない ）
+    // $($(this).attr('href')).show();
   });
 });
 </script>

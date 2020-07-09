@@ -11,8 +11,6 @@ module Portfolio
     #kaminari japanise
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-    # carrierwave
-    config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     

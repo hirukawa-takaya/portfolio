@@ -1,6 +1,6 @@
 <div class="topic-index-wrapper">
   <div class="container">
-    <% @likes.each do |topic| %>
+    <% @my_likes.each do |topic| %>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="topic-index-single">
@@ -11,9 +11,9 @@
 
             <div class="descript">
               <% if topic.password_digest.nil? %>
-                <% if topic.image_path.url %>
+                <% if topic.image.attached? %>
                   <%= link_to topic_path(topic) do %>
-                    <%= image_tag topic.image_path.url %>
+                    <%= image_tag topic.image %>
                   <% end %>
                 <% end %>
 

@@ -6,9 +6,6 @@ class Topic < ApplicationRecord
   has_many   :like_users, through: :likes, source: 'user'
   has_many   :comments, dependent: :destroy
 
-  # carrierwave
-  mount_uploader :image_path, ImageUploader
-
   # presence:trueを無効
   has_secure_password(validations: false)
   
