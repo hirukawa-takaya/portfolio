@@ -21,13 +21,14 @@
             </div>
   
             <div class="form-group">
-              <%= f.label :descript, 'description(必須)' %>
+              <%= f.label :description, "description(必須)" %>
               <%= f.text_area :description, class: 'form-control' %>
             </div>
-  
+
             <div class="form-group">
               <%= f.label :password, 'password(任意)' %>
-              <%= f.password_field :password, class: 'form-control' %>
+              <%= f.text_field :password, class: 'form-control', id: 'password' %>
+              <%= button_tag 'パスワードを生成する', id: 'auto-fill-link', type: "button" %>
             </div>
   
             <%= f.submit '投稿', class: 'btn btn-black btn-block' %>
@@ -37,3 +38,14 @@
     </div>
   </div>
 </div>
+  
+<script>
+  $(function(){
+    autoFill();
+    function autoFill() {
+      $('#auto-fill-link').click(function(){
+        $('#password').val("<%= @password %>");
+      });
+    }
+  })
+</script>

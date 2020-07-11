@@ -1,10 +1,6 @@
 class LikesController < ApplicationController
-  before_action :logged_in_user, only: [:index, :create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy]
   
-  def index
-    @like_topics = current_user.like_topics.page(params[:page]).per(8)
-  end
-      
   def create
     @topic = Topic.find(params[:topic_id])
     like = Like.new

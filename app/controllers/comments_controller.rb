@@ -9,16 +9,17 @@ class CommentsController < ApplicationController
     
     if @comment.save
       flash[:success] = "コメントしました"
-      redirect_to "/topics/#{@topic}"
+      redirect_to "/topics/#{@topic.id}"
     else
       redirect_to login_path
     end
   end
   
   def destroy
+    @topic = Topic.find(params[:topic_id])
     @comment.destroy
     flash[:success] = "削除しました"
-    redirect_to "/topics/#{@topic}"
+    redirect_to "/topics/#{@topic.id}"
   end
   
   private

@@ -116,51 +116,77 @@ RSpec.describe TopicsController, type: :controller do
   end
   
   describe "#show" do
+    before do
+      @topic = FactoryBot.create(:topic, :without_password)
+    end
+    
+    describe "without a password" do
+      it "responds successfully" do
+        get :show, params: { id: @topic.id }
+          expect(response).to be_success
+        end
+      
+      it "returns a 200 response" do
+        get :show, params: { id: @topic.id }
+          expect(response).to have_http_status "200"
+      end
+    end
+    
+    describe "with password" do
+      before do
+        @topic = FactoryBot.create(:topic)
+      end
+      it "redirect to topic_password" do
+        get :show, params: { id: @topic.id }
+          expect(response).to redirect_to "/topic_password/#{@topic.id}"
+      end
+    end
+    
   end
   
-  # describe "#destroy" do
-  #   context "as an authorized user" do
-  #     before do
-  #       @user = FactoryBot.create(:user)
-  #       @topic = FactoryBot.create(:topic)
-  #     end
-  #     it "deletes a project" do
-  #       log_in @user
-  #       expect{
-  #         delete :destroy, params: { id: @topic.id }
-  #       }.to change(Topic, :count).by(-1)
-  #     end
-  #   end
+  describe "#destroy" do
+    context "as an authorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        @topic = FactoryBot.create(:topic)
+      end
+    #   it "deletes a project" do
+    #     log_in @user
+    #     expect{
+    #       delete :destroy, params: { id: @topic.id }
+    #     }.to change(@user.topics, :count).by(-1)
+    #   end
+    # end
     
-  #   context "as an unauthorized user" do
-  #     before do
-  #       @user = FactoryBot.create(:user)
-  #       other_user = FactoryBot.create(:user)
-  #       @topic = FactoryBot.create(:topic, user: other_user)
-  #     end
-  #     it "does not delete the project" do
-  #       log_in @user
-  #       delete :destroy, params: { id: @topic.id }
-  #       expect(response).to_not change(Topic, :count)
-  #     end
+    # context "as an unauthorized user" do
+    #   before do
+    #     @user = FactoryBot.create(:user)
+    #     other_user = FactoryBot.create(:user)
+    #     @topic = FactoryBot.create(:topic, user: other_user)
+    #   end
+    #   it "does not delete the project" do
+    #     log_in @user
+    #     delete :destroy, params: { id: @topic.id }
+    #     expect(response).to_not change(@user.topics, :count)
+    #   end
       
-  #     it "redirects to the index" do
-  #     end
-  #   end
+      it "redirects to the index" do
+      end
+    end
     
-  #   context "as a gest" do
-  #     before do
-  #       @topic = FactoryBot.create(:topic)
-  #     end
+    context "as a gest" do
+      before do
+        @topic = FactoryBot.create(:topic)
+      end
       
-  #     it "redirects to the log-in page" do
-  #       delete :destroy, params: { id: @topic.id }
-  #       expect(response).to redirect_to login_path
-  #     end
+      it "redirects to the log-in page" do
+        delete :destroy, params: { id: @topic.id }
+        expect(response).to redirect_to login_path
+      end
       
-  #     it "does not delete the project" do
-  #     end
-  #   end
-  # end
+      it "does not delete the project" do
+      end
+    end
+  end
 
 end

@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
   def new
     @topic = Topic.new
     @like = Like.new
+    @password = SecureRandom.alphanumeric(6)
   end
   
   def create
@@ -22,6 +23,8 @@ class TopicsController < ApplicationController
   def index
     @topics = Topic.all.includes(:like_users).page(params[:page]).per(8).order("created_at DESC")
     @user = Topic.find_by(user_id: params[:user_id])
+    @q = Topic.ransack(params[:q])
+    @results = @q.result(distinct: true).order("created_at DESC")
   end
   
   def topic_password

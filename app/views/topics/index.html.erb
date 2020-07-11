@@ -1,6 +1,80 @@
 <div class="topic-index-wrapper">
   <div class="container">
 
+<div class="col-md-6 col-md-offset-3">
+<%= search_form_for @q do |f| %>
+  <%= f.label :description_cont, "キーワード" %><br>
+  <%= f.search_field :description_cont %>
+  <%= f.submit "検索" %>
+<% end %>
+</div>
+
+<% if @results.any? %>
+  <% @results.each do |result| %>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="topic-index-single">
+
+            <h2 class="topic-author">
+              <%= link_to result.user.name, user_path(result.user.id) %>
+            </h2>
+
+            <div class="descript">
+              <% if result.password_digest.nil? %>
+                <% if result.image.attached? %>
+                  <%= link_to topic_path(result) do %>
+                    <%= image_tag result.image %>
+                  <% end %>
+                <% end %>
+
+              <% else %>
+
+                <%= link_to "/topic_password/#{result.id}", id: result.id do %>
+                  <%= image_tag "password.jpg" %>
+                <% end %>
+              <% end %>
+            </div>
+
+                <ul class="comments-likes">
+                  <% if logged_in? %>
+                    <%= link_to topic_path(result) do %>
+                      <li><i class="far fa-comment-dots like-btn"></i></li>
+                    <% end %>
+                    <li id="likes_buttons_<%= result.id %>"><%= render partial: 'likes/like', locals: { topic: result} %></li>
+                  <% else %>
+                    <%= link_to topic_path(result) do %>
+                      <li><i class="far fa-comment-dots like-btn"></i></li>
+                    <% end %>
+                    <li><i class="far fa-heart like-btn" ></i></li>
+                    <li><%= result.like_users.count %></li>
+                  <% end %>
+                </ul>
+
+            <div class="descript">
+              <%= link_to topic_path(result) do %>
+                <% if result.password_digest.nil? %>
+                  <p class="topic-text">
+                    <%= result.description %>
+                  </p>
+                <% else %>
+                  <p class="topic-text">
+                    <%= link_to "secret", "/topic_password/#{result.id}", id: result.id %>
+                  </p>
+                <% end %>
+
+                <div class="text-right" >
+                  <%= l result.created_at %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+ 
+<% else %>
+
     <% @topics.each do |topic| %>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -67,6 +141,7 @@
       <div class="text-center">
         <%= paginate @topics %>
       </div>
+ <% end %>
 
   </div>
 </div>
