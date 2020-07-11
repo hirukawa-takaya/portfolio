@@ -23,9 +23,9 @@ class UsersController < ApplicationController
     @user_topics   = Topic.where(user_id: @user).count
     @user_likes    = Like.where(user_id: @user).count
     @user_comments = Comment.where(user_id: @user).count
-    @my_topics     = @user.topics.all
-    @my_likes      = @user.like_topics
-    @my_comments   = @user.comment_topics
+    @my_topics     = @user.topics.all.order("created_at DESC")
+    @my_likes      = @user.like_topics.order("created_at DESC")
+    @my_comments   = @user.comment_topics.order("created_at DESC")
   end
   
   def edit
