@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
   def authenticate
     topic_id = Topic.find(params[:id])
     if topic_id && topic_id.authenticate(params[:topic][:password])
-      redirect_to topic_path(topic_id, password: topic_params), success: '成功'
+      redirect_to topic_path(topic_id, :password), success: '成功'
     else
       flash.now[:danger] = '正しいパスワードを入力してください'
       render 'topic_password'
@@ -49,7 +49,12 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     @topic.destroy
-    redirect_to topics_path
+    url = request.url
+    if url.include?("topics")
+      redirect_to topics_path
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private
@@ -65,14 +70,14 @@ class TopicsController < ApplicationController
   def with_password
     url = request.url
     @topic = Topic.find(params[:id])
-    if !@topic.password_digest.nil? && !url.include?("password")
+    unless @topic.password_digest.nil? && url.include?("password")
       redirect_to "/topic_password/#{@topic.id}", danger: 'パスワードを入力してください'
     end
   end
   
   def without_password
     @topic = Topic.find(params[:id])
-    if @topic.password_digest.nil?
+    unless @topic.password_digest
       redirect_to topics_path
     end
   end

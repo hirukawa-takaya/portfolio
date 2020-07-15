@@ -19,7 +19,9 @@
             <h3>Log In</h3>
             <%= render 'sessions/login_form' %>
           <% else %>
-            <h1 class="text-center">welcome</h1>
+            <%= link_to new_topic_path do %>
+              <h1 class="button-2">投稿する</h1>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -40,7 +42,7 @@
             </h2>
 
             <div class="descript">
-              <% if topic.password_digest.nil? %>
+              <% unless topic.password_digest %>
                 <% if topic.image.attached? %>
                   <%= link_to topic_path(topic) do %>
                     <%= image_tag topic.image %>
@@ -72,7 +74,7 @@
 
             <div class="descript">
               <%= link_to topic_path(topic) do %>
-                <% if topic.password_digest.nil? %>
+                <% unless topic.password_digest %>
                   <p class="topic-text">
                     <%= topic.description %>
                   </p>
