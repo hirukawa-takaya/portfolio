@@ -70,14 +70,14 @@ class TopicsController < ApplicationController
   def with_password
     url = request.url
     @topic = Topic.find(params[:id])
-    unless @topic.password_digest.nil? && url.include?("password")
+    if !@topic.password_digest.nil? && !url.include?("password")
       redirect_to "/topic_password/#{@topic.id}", danger: 'パスワードを入力してください'
     end
   end
   
   def without_password
     @topic = Topic.find(params[:id])
-    unless @topic.password_digest
+    if @topic.password_digest.nil?
       redirect_to topics_path
     end
   end
