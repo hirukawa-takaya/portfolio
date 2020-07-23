@@ -21,17 +21,17 @@ class TopicsController < ApplicationController
   end
   
   def index
-    # @topics = Topic.all.includes(:like_users).page(params[:page]).per(8)
     @user = Topic.find_by(user_id: params[:user_id])
     @q = Topic.ransack(params[:q])
     @results = @q.result(distinct: true).order("created_at DESC")
-    # @sorts = @sorts.order(params[:change])
     
     if params[:option] == "A" || params[:option] == nil
-      @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
+      @topics = Topic.all.order('created_at DESC').includes(:like_users)
     elsif params[:option] == "B"
-      @topics = Topic.all.order('created_at ASC')
+      @topics = Topic.all.order('created_at DESC').includes(:like_users)
     elsif params[:option] == "C"
+      @topics = Topic.all.order('created_at ASC').includes(:like_users)
+    elsif params[:option] == "D"
       @topics = Topic.find(Like.group(:topic_id).order(Arel.sql('count(topic_id) desc')).pluck(:topic_id))
     end
     
