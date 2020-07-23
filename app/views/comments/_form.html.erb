@@ -1,0 +1,7 @@
+<%= form_for [@topic, @comment], remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control', id: 'comment_field' %>
+  </div>
+  <%= f.submit 'コメントする' %>
+<% end %>

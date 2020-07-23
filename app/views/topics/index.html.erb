@@ -9,7 +9,13 @@
 <% end %>
 </div>
 
-<% if @results.any? %>
+<div class="col-md-6 col-md-offset-3 field">
+  <%= link_to "新着順", topics_path(option:"A") %>
+  <%= link_to "古い順", topics_path(option:"B") %>
+  <%= link_to "いいね多い順", topics_path(option: "C") %>
+</div>
+
+<% if !@q.description_cont.nil? %>
   <% @results.each do |result| %>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -72,9 +78,9 @@
         </div>
       </div>
     <% end %>
-<div class="text-center">
-  <%= paginate @topics %>
-</div>
+<!--<div class="text-center">-->
+<!--  <%#= paginate @topics %>-->
+<!--</div>-->
 <% else %>
 
     <% @topics.each do |topic| %>

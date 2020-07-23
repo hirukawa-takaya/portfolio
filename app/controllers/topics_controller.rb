@@ -21,19 +21,29 @@ class TopicsController < ApplicationController
   end
   
   def index
-    @topics = Topic.all.includes(:like_users).page(params[:page]).per(8).order("created_at DESC")
+    # @topics = Topic.all.includes(:like_users).page(params[:page]).per(8)
     @user = Topic.find_by(user_id: params[:user_id])
     @q = Topic.ransack(params[:q])
     @results = @q.result(distinct: true).order("created_at DESC")
+    # @sorts = @sorts.order(params[:change])
+    
+    if params[:option] == "A" || params[:option] == nil
+      @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
+    elsif params[:option] == "B"
+      @topics = Topic.all.order('created_at ASC')
+    elsif params[:option] == "C"
+      @topics = Topic.find(Like.group(:topic_id).order(Arel.sql('count(topic_id) desc')).pluck(:topic_id))
+    end
+    
   end
   
   def topic_password
   end
   
   def authenticate
-    topic_id = Topic.find(params[:id])
-    if topic_id && topic_id.authenticate(params[:topic][:password])
-      redirect_to topic_path(topic_id, :password), success: '成功'
+    topic = Topic.find(params[:id])
+    if topic && topic.authenticate(params[:topic][:password])
+      redirect_to topic_path(topic, parameter: topic.password_digest), success: '成功'
     else
       flash.now[:danger] = '正しいパスワードを入力してください'
       render 'topic_password'
@@ -42,7 +52,7 @@ class TopicsController < ApplicationController
   
   def show
     @topic = Topic.find(params[:id])
-    @comments = @topic.comments
+    @comments = @topic.comments.order(created_at: :desc)
     @comment = Comment.new
   end
   
@@ -59,7 +69,7 @@ class TopicsController < ApplicationController
 
   private
   def topic_params
-    params.require(:topic).permit(:image, :description, :password)
+    params.require(:topic).permit(:image, :description, :password, :parameter)
   end
   
   def correct_user
@@ -68,9 +78,12 @@ class TopicsController < ApplicationController
   end
   
   def with_password
-    url = request.url
+    url = request.url.gsub!(/%21|%22|%23|%24|%24|%25|%26|%27|%28|%29|%2A|%2B|%2C|%2F|%3A|%3B|%3C|%3D|%3E|%3F|%40|%5B|%5D|%5E|%60|%7B|%7C|%7D|%7E|/,
+    "%21" => "!", "%22" => '"', "%23" => "#", "%24" => "$", "%25" => "%", "%26" => "&", "%27" => "'", "%28" => "(", "%29" => ")",
+    "%2A" => "*", "%2B" => "+", "%2C" => ",", "%2F" => "/", "%3A" => ":", "%3B" => ";", "%3C" => "<", "%3D" => "=", "%3E" => ">", "%3F" => "?", "%40" => "@",
+    "%5B" => "[", "%5D" => "]", "%5E" => "^", "%60" => "`", "%7B" => "{", "%7C" => "|", "%7D" => "}", "%7E" => "~")
     @topic = Topic.find(params[:id])
-    if !@topic.password_digest.nil? && !url.include?("password")
+    if !@topic.password_digest.nil? && !url.try(:include?, @topic.password_digest)
       redirect_to "/topic_password/#{@topic.id}", danger: 'パスワードを入力してください'
     end
   end

@@ -33,22 +33,11 @@
             <% end %>
           <% end %>
 
-          <% @comments.each do |c| %>
-            <div class="text-left">@<%= link_to c.user.name, user_path(c.user_id) %></div>
-            <%= c.content %>
-            <div class="text-right border-bottom"><%= l c.created_at %></div>
-            <% if current_user == c.user %>
-              <div class="text-right"><%= link_to "削除", topic_comment_path(@topic, c), method: :delete %></div>
-            <% end %>
-          <% end %>
+          <dic id="comment_area">
+            <%= render partial: "comments/comment", locals: { comments: @comments, topic: @topic } %>
+          </div>
 
-          <%= form_for [@topic, @comment] do |f| %>
-            <div class="form-group">
-              <%= f.label :content %>
-              <%= f.text_area :content, class: 'form-control' %>
-            </div>
-            <%= f.submit 'コメントする' %>
-          <% end %>
+          <%= render partial: "comments/form" %>
 
         </div>
       </div>
