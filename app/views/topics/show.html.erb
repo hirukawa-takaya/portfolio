@@ -33,9 +33,7 @@
             <% end %>
           <% end %>
 
-          <dic id="comment_area">
-            <%= render partial: "comments/comment", locals: { comments: @comments, topic: @topic } %>
-          </div>
+          <%= render partial: "comments/comment", locals: { comments: @comments, topic: @topic }, id: "comment_area" %>
 
           <%= render partial: "comments/form" %>
 
