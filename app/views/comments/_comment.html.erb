@@ -9,9 +9,7 @@
     </div>
     <% if current_user == c.user %>
       <div class="text-right border-bottom"><%= link_to "削除", topic_comment_path(c.topic_id, c.id), method: :delete, remote: true %></div>
-      <% else %>
-      <p>　　</p>
+    <% end %>
   </div>
-    <hr>
-  <% end %>
+  <hr>
 <% end %>
