@@ -23,16 +23,16 @@ class TopicsController < ApplicationController
   def index
     @user = Topic.find_by(user_id: params[:user_id])
     @q = Topic.ransack(params[:q])
-    @results = @q.result(distinct: true).order("created_at DESC")
+    @results = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
     
     if params[:option] == "A" || params[:option] == nil
-      @topics = Topic.all.order('created_at DESC').includes(:like_users)
+      @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
     elsif params[:option] == "B"
-      @topics = Topic.all.order('created_at DESC').includes(:like_users)
+      @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
     elsif params[:option] == "C"
-      @topics = Topic.all.order('created_at ASC').includes(:like_users)
+      @topics = Topic.all.order('created_at ASC').includes(:like_users).page(params[:page]).per(8)
     elsif params[:option] == "D"
-      @topics = Topic.find(Like.group(:topic_id).order(Arel.sql('count(topic_id) desc')).pluck(:topic_id))
+      @topics = Kaminari.paginate_array(Topic.find(Like.group(:topic_id).order(Arel.sql('count(topic_id) desc')).pluck(:topic_id))).page(params[:page]).per(8)
     end
     
   end
