@@ -60,7 +60,7 @@ group :test do
   gem 'guard'
   gem 'guard-minitest'
   gem 'capybara'
-  gem 'webdrivers'
+  gem 'webdriver'
   gem 'launchy'
 end
 

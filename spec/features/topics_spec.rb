@@ -48,22 +48,22 @@ RSpec.feature "Topics", type: :feature do
     }.to_not change(user.topics, :count)
   end
   
-  scenario "user comments a topic" do
-    user = FactoryBot.create(:user)
-    visit root_path
-    click_link "ログイン"
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "ログイン"
+  # scenario "user comments a topic" do
+  #   user = FactoryBot.create(:user)
+  #   visit root_path
+  #   click_link "ログイン"
+  #   fill_in "Email", with: user.email
+  #   fill_in "Password", with: user.password
+  #   click_button "ログイン"
     
-    expect{
-      visit new_topic_path
-      fill_in "topic_description", with: "test"
-      click_button "投稿"
-      click_link "test"
-      fill_in "comment_content", with: "comment"
-      click_button "コメントする"
-    }.to change(user.comments, :count).by(1)
-  end
+  #   expect{
+  #     visit new_topic_path
+  #     fill_in "topic_description", with: "test"
+  #     click_button "投稿"
+  #     click_link "test"
+  #     fill_in "comment_content", with: "comment"
+  #     click_button "コメントする"
+  #   }.to change(user.comments, :count).by(1)
+  # end
   
 end

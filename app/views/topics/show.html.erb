@@ -21,21 +21,35 @@
             <%= @topic.description %>
           </p>
 
-          <div class="text-left" >
-            <%= l @topic.created_at %><br>
-          </div>
-
-          <% if logged_in? %>
-            <% if @topic.user_id == current_user.id %>
-            <div class="text-right" >
-              <%= link_to '削除', "#{@topic.id}/destroy", method: :delete %>
+          <div class="created-destroy">
+            <div class="text-left" >
+              <%= l @topic.created_at %><br>
             </div>
+  
+            <% if logged_in? %>
+              <% if @topic.user_id == current_user.id %>
+              <div class="text-right" >
+                <%= link_to '削除', "#{@topic.id}/destroy", method: :delete %>
+              </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
+          <hr>
 
-          <%= render partial: "comments/comment", locals: { comments: @comments, topic: @topic }, id: "comment_area" %>
-
-          <%= render partial: "comments/form" %>
+          <div class="main-comment">
+            <ul class="comment-button">
+              <li><i class="far fa-comment-dots like-btn"></i><li>
+              <li class="comment-letter">コメント</li>
+            </ul>
+            
+            <div id="comment-area">
+              <%= render partial: "comments/comment", locals: { comments: @comments } %>
+            </div>
+  
+            <% if logged_in? %>
+              <%= render partial: "comments/form", locals: { comment: @comment, topic: @topic } %>
+            <% end %>
+          </div>
 
         </div>
       </div>

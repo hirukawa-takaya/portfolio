@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   
   root      'home#top'
-  get       '/index',      to: 'home#index'
   
   resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
   

@@ -52,8 +52,8 @@ class TopicsController < ApplicationController
   
   def show
     @topic = Topic.find(params[:id])
-    @comments = @topic.comments.order(created_at: :desc)
     @comment = Comment.new
+    @comments = @topic.comments
   end
   
   def destroy

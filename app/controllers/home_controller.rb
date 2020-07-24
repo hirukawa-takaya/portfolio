@@ -6,8 +6,4 @@ class HomeController < ApplicationController
     @topic = Topic.new
     @like = Like.new
   end
-  
-  def index
-    @users = User.all
-  end
 end
