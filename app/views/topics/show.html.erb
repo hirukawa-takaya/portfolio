@@ -14,7 +14,11 @@
  
               <ul class="comments-likes">
                 <li><i class="far fa-comment-dots like-btn"></i></li>
-                <li id="likes_buttons_<%= @topic.id %>"><%= render partial: 'like_for_show', locals: { topic: @topic} %></li>
+                <% if logged_in? %>
+                  <li id="likes_buttons_<%= @topic.id %>"><%= render partial: 'like_for_show', locals: { topic: @topic} %></li>
+                <% else %>
+                  <li><i class="far fa-heart like-btn" ></i></li>
+                <% end %>
               </ul>
 
           <p class="topic-text">

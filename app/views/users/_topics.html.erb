@@ -1,6 +1,6 @@
 <div class="topic-index-wrapper">
   <div class="container">
-    <% @my_likes.each do |topic| %>
+    <% comments.each do |topic| %>
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="topic-index-single">
@@ -32,8 +32,11 @@
                     <% end %>
                     <li id="likes_buttons_<%= topic.id %>"><%= render partial: 'likes/like', locals: { topic: topic} %></li>
                   <% else %>
+                    <%= link_to topic_path(topic) do %>
+                      <li><i class="far fa-comment-dots like-btn"></i></li>
+                    <% end %>
                     <li><i class="far fa-heart like-btn" ></i></li>
-                    <li><%= topic.like_users.count %></li>
+                    <li class="likes-position"><%= topic.like_users.count %></li>
                   <% end %>
                 </ul>
 
@@ -59,10 +62,5 @@
         </div>
       </div>
     <% end %>
-
-      <!--<div class="text-center">-->
-      <!--  <%#= paginate @topics %>-->
-      <!--</div>-->
-
   </div>
 </div>

@@ -61,7 +61,7 @@ RSpec.feature "Topics", type: :feature do
   #     fill_in "topic_description", with: "test"
   #     click_button "投稿"
   #     click_link "test"
-  #     fill_in "comment_content", with: "comment"
+  #     fill_in "comment-field", with: "comment"
   #     click_button "コメントする"
   #   }.to change(user.comments, :count).by(1)
   # end

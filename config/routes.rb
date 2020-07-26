@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   post      '/likes',      to: 'likes#create'
   delete    '/likes',      to: 'likes#destroy'
   
+  get '*path', controller: 'application', action: 'render_404'
 end

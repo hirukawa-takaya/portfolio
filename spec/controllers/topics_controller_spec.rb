@@ -151,12 +151,12 @@ RSpec.describe TopicsController, type: :controller do
         @topic = FactoryBot.create(:topic)
       end
       
-      # it "deletes a topic" do
-      #   log_in @user
-      #   expect{
-      #     delete :destroy, params: { id: @topic.id }
-      #   }.to change(@user.topics, :count).by(-1)
-      # end
+      it "deletes a topic" do
+        log_in @user
+        expect{
+          delete :destroy, params: { id: @topic.id }
+        }.to change(Topic, :count).by(-1)
+      end
     end
     
     context "as an unauthorized user" do
