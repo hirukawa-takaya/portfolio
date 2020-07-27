@@ -1,1 +1,10 @@
-$('#likes_buttons_<%= @topic.id %>').html("<%= j(render partial: 'likes/like', locals: {topic: @topic}) %>");
+var click = true;
+$("#likes_buttons_<%= @topic.id %>").on("click", function() {
+  if(click) {
+    click=false;
+    setTimeout(function() {
+      click = true;
+    }, 1000);
+    $('#likes_buttons_<%= @topic.id %>').html("<%= j(render partial: 'likes/like', locals: {topic: @topic}) %>");
+  }
+});

@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
     @comment.save
     if @comment.save
       render :comments
+      flash.now[:success] = "コメントしました"
     end
   end
   
