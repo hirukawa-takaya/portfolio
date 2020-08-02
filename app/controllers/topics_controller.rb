@@ -25,14 +25,14 @@ class TopicsController < ApplicationController
     @q = Topic.ransack(params[:q])
     @results = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
     
-    if params[:option] == "A" || params[:option] == nil
+    if params[:option] == "new" || params[:option] == nil
       @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
-    elsif params[:option] == "B"
+    elsif params[:option] == "new"
       @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
-    elsif params[:option] == "C"
+    elsif params[:option] == "old"
       @topics = Topic.all.order('created_at ASC').includes(:like_users).page(params[:page]).per(8)
-    elsif params[:option] == "D"
-      @topics = Kaminari.paginate_array(Topic.find(Like.group(:topic_id).order(Arel.sql('count(topic_id) desc')).pluck(:topic_id))).page(params[:page]).per(8)
+    elsif params[:option] == "like_most"
+      @topics = Kaminari.paginate_array(Topic.left_joins(:likes).group(:id).order(Arel.sql('COUNT(likes.id) DESC'))).page(params[:page]).per(8)
     end
     
   end

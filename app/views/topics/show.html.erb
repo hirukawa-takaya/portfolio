@@ -21,9 +21,9 @@
                 <% end %>
               </ul>
 
-          <p class="topic-text">
-            <%= @topic.description %>
-          </p>
+          <div class="topic-text">
+            <%= simple_format(@topic.description) %>
+          </div>
 
           <div class="created-destroy">
             <div class="text-left" >

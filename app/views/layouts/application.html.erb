@@ -20,16 +20,14 @@
       $(function(){
         $(".alert").fadeOut(5000);
       });
-    </script>
     
-    <script>
-(function() {
-  this.App || (this.App = {});
-
-  App.cable = ActionCable.createConsumer();
-
-}).call(this);
-</script>
+      (function() {
+        this.App || (this.App = {});
+      
+        App.cable = ActionCable.createConsumer();
+      
+      }).call(this);
+    </script>
     
   </body>
 </html>
