@@ -1,8 +1,7 @@
 <% if !@topic.like_users.include?(current_user) %>
-  <%= link_to likes_path(topic_id: @topic.id), method: :post, remote: true do %>
-    <i class="far fa-heart like-btn" ></i>
-    <%= @topic.like_users.count %>
+  <%= link_to likes_path(topic_id: @topic.id), class: "far fa-heart like-btn", method: :post, remote: true, data: { disable_with: "" } do %>
   <% end %>
+  <%= @topic.like_users.count %>
 <% else %>
   <%= link_to likes_path(topic_id: @topic.id), method: :delete, remote: true do %>
     <i class="fas fa-heart unlike-btn"></i>
