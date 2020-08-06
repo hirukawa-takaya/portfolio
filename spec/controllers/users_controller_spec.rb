@@ -45,7 +45,7 @@ RSpec.describe UsersController, type: :controller do
       end
       
       context "with invalid attributes" do
-        it "does not add a project" do
+        it "does not add a user" do
           user_params = FactoryBot.attributes_for(:user, name: nil)
           expect{
             post :create, params: { user: user_params }

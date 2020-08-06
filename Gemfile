@@ -26,7 +26,6 @@ gem 'ransack'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
 end
@@ -47,8 +46,8 @@ group :test do
   gem 'guard'
   gem 'guard-minitest'
   gem 'capybara'
-  gem 'webdriver'
   gem 'launchy'
+  gem 'webdrivers'
 end
 
 group :production do

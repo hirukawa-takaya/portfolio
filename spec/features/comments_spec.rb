@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "Likes", type: :feature do
-  scenario "user can like" , js: true do
+RSpec.feature "Comment", type: :feature do
+  scenario "user can comment" , js: true do
     user = FactoryBot.create(:user)
     visit root_path
     find("#login").click
@@ -13,12 +13,13 @@ RSpec.feature "Likes", type: :feature do
     fill_in "topic_description", with: "test"
     click_button "投稿"
     
-    expect{
-      page.all(".like-btn")[1].click
-    }.to change(user.likes, :count).by(1)
+    click_link "test"
+    fill_in "comment[content]", with: "test comment"
+    click_button "コメントする"
+    expect(page).to have_content "test comment"
   end
   
-  scenario "user can destroy like" , js: true do
+  scenario "user can destroy comment" , js: true do
     user = FactoryBot.create(:user)
     visit root_path
     find("#login").click
@@ -30,10 +31,12 @@ RSpec.feature "Likes", type: :feature do
     fill_in "topic_description", with: "test"
     click_button "投稿"
     
-    page.all(".like-btn")[1].click
+    click_link "test"
+    fill_in "comment[content]", with: "destroy comment"
+    click_button "コメントする"
     expect{
-      find(".unlike-btn").click
-    }.to change(user.likes, :count).by(-1)
-  end
+      find(".destroy-comment").click
+    }.to change(user.comments, :count).by(-1)
+  end  
   
 end

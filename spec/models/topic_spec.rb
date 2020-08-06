@@ -13,15 +13,13 @@ RSpec.describe Topic, type: :model do
       topic.valid?
       expect(topic.errors.messages[:description]).to include("を入力してください")
     end
-    #descriptionなしの場合はinvalid
-    #255文字以上の場合invalid
+    
+    it "is invalid that has more than 256" do
+      topic = FactoryBot.build(:topic, description: "a" * 256)
+      topic.valid?
+      expect(topic.errors[:description]).to include("は255文字以内で入力してください")
+    end
+    
   end
   
-  describe "#image_path" do
-    #画像なしvalid
-  end
-  
-  describe "#password" do
-    #passweordなしvalid
-  end
 end

@@ -16,11 +16,11 @@
         </div>
         <div class="col-lg-7 centered">
           <% unless logged_in? %>
-            <%= link_to login_path do %>
-              <h1 class="button-2">Login</h1>
+            <%= link_to login_path, id: "login" do %>
+              <h1 class="button-2">ログイン</h1>
             <% end %>
-            <%= link_to new_user_path do %>
-              <h1 class="button-2">Sign Up</h1>
+            <%= link_to new_user_path, id: "signup" do %>
+              <h1 class="button-2">サインアップ</h1>
             <% end %>
           <% else %>
             <%= link_to current_user do %>

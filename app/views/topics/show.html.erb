@@ -18,6 +18,7 @@
                   <li id="likes_buttons_<%= @topic.id %>"><%= render partial: 'like_for_show', locals: { topic: @topic} %></li>
                 <% else %>
                   <li><i class="far fa-heart like-btn" ></i></li>
+                  <li class="likes-position"><%= @topic.like_users.count %></li>
                 <% end %>
               </ul>
 
@@ -26,7 +27,7 @@
           </div>
 
           <div class="created-destroy">
-            <div class="text-left" >
+            <div class="text-left">
               <%= l @topic.created_at %><br>
             </div>
   
