@@ -12,18 +12,18 @@
             <%= image_tag @topic.image %>
           <% end %>
  
-              <ul class="comments-likes">
-                <li><i class="far fa-comment-dots like-btn"></i></li>
-                <% if logged_in? %>
-                  <li id="likes_buttons_<%= @topic.id %>"><%= render partial: 'like_for_show', locals: { topic: @topic} %></li>
-                <% else %>
-                  <li><i class="far fa-heart like-btn" ></i></li>
-                  <li class="likes-position"><%= @topic.like_users.count %></li>
-                <% end %>
-              </ul>
+          <ul class="comments-likes">
+            <li><i class="far fa-comment-dots like-btn"></i></li>
+            <% if logged_in? %>
+              <li id="likes_buttons_<%= @topic.id %>"><%= render partial: 'like_for_show', locals: { topic: @topic} %></li>
+            <% else %>
+              <li><i class="far fa-heart like-btn" ></i></li>
+              <li class="likes-position"><%= @topic.like_users.count %></li>
+            <% end %>
+          </ul>
 
           <div class="topic-text">
-            <%= simple_format(@topic.description) %>
+            <%= simple_format(@topic.description, {}, wrapper_tag: "a") %>
           </div>
 
           <div class="created-destroy">

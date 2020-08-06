@@ -5,7 +5,7 @@
       <div class="text-right"><%= l c.created_at %></div>
     </div>
     <div class="comment-content">
-      <%= c.content %>
+      <%= simple_format(c.content, {}, wrapper_tag: "a") %>
     </div>
     <% if current_user == c.user %>
       <div class="text-right border-bottom"><%= link_to "削除", topic_comment_path(c.topic_id, c.id), method: :delete, remote: true, class: "destroy-comment" %></div>
