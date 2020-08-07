@@ -23,16 +23,15 @@ class TopicsController < ApplicationController
   def index
     @user = Topic.find_by(user_id: params[:user_id])
     @q = Topic.ransack(params[:q])
-    @results = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
     
     if params[:option] == "new" || params[:option] == nil
-      @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
+      @results = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
     elsif params[:option] == "new"
-      @topics = Topic.all.order('created_at DESC').includes(:like_users).page(params[:page]).per(8)
+      @results = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
     elsif params[:option] == "old"
-      @topics = Topic.all.order('created_at ASC').includes(:like_users).page(params[:page]).per(8)
+      @results = @q.result(distinct: true).order("created_at ASC").page(params[:page]).per(8)
     elsif params[:option] == "like_most"
-      @topics = Kaminari.paginate_array(Topic.left_joins(:likes).group(:id).order(Arel.sql('COUNT(likes.id) DESC'))).page(params[:page]).per(8)
+      @results = Kaminari.paginate_array(@q.result(distinct: true).left_joins(:likes).group(:id).order(Arel.sql('COUNT(likes.id) DESC'))).page(params[:page]).per(8)
     end
     
   end
