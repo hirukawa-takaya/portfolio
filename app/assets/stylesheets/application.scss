@@ -9,8 +9,6 @@ body {
   font-weight: 300;
   font-size: 16px;
   color: #555;
-  -webkit-font-smoothing: antialiased;
-  -webkit-overflow-scrolling: touch;
   margin-top: 70px;
 }
 
@@ -116,14 +114,10 @@ hr {
   letter-spacing: 1px;
 }
 
-/* WRAP SECTIONS */
-
-/* hello */
-
 #hello {
   width: 100%;
   padding-top: 250px;
-  padding-bottom: 250px;
+  padding-bottom: 300px;
 
   h1 {
     font-size: 80px;
@@ -131,50 +125,17 @@ hr {
     letter-spacing: 3px;
     color: #74cfae;
   }
-
-  h2 {
-    color: #c0c0c0;
-    font-weight: 400;
-    margin-top: 70px;
-  }
 }
-
-/* Green */
 
 #green {
   background-color: #74cfae;
   padding-top: 50px;
   margin-bottom: 0px;
 
-  h3 {
-    color: white;
-    font-weight: 400;
-    margin-bottom: 35px;
-  }
-
   p {
     color: white;
     font-weight: 400;
-    font-size: 20px;
-  }
-}
-
-/* Social Links */
-
-#social {
-  padding: 40px 0;
-
-  i {
-    font-size: 50px;
-    color: #74cfae;
-  }
-
-  .col-md-3 {
-    &:hover {
-      background-color: #f5f5f5;
-    }
-
-    padding: 30px;
+    font-size: 25px;
   }
 }
 
@@ -321,13 +282,6 @@ hr {
     color: #fff;
   }
 
-  a {
-    color: #74cfae;
-  }
-}
-
-.credits {
-  color: #999;
 }
 
 /**サインアップ**/
@@ -432,9 +386,6 @@ hr {
       margin-left: 20px;
     }
     
-    .commnet-index{
-      
-    }
   }
 }
 
@@ -513,7 +464,7 @@ hr {
 }
 
 .name-created {
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -525,6 +476,10 @@ hr {
 .comment-clear {
   clear: both;
 }
+
+.comment-user {
+  font-weight: bold;
+}
  
 // errors
 #error_explanation {
@@ -534,13 +489,6 @@ hr {
     margin: 0 0 30px 0;
   }
 }
-
-// .field_with_errors {
-//   @extend .has-error;
-//   .form-control {
-//     color: $state-danger-text;
-//   }
-// }
 
 .comments-likes{
   float: left;
@@ -577,18 +525,12 @@ $white: #FFFFFF;
 $black: #000000;
 $dark-gray: lighten($black, 20%);
 $gray: lighten($black, 40%);
-$light-gray: lighten($black, 60%);
-
 $primary: #303841;
-$accent: #0781D7;
 
 body {
   background: #F3F3F3;
   color: $gray;
   font-size: 14px;
-  font-family: 'Open Sans';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .card {
@@ -620,21 +562,21 @@ body {
       }
     }
     
-    &__follow {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: $white;
-      border-radius: 2px;
-      box-shadow: 0 2px 4px rgba($black, 0.2);
-      padding: 6px 10px;
-      color: $dark-gray;
-      font-size: 10px;
-      font-weight: 600;
-      line-height: normal;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
+    // &__follow {
+    //   position: absolute;
+    //   top: 20px;
+    //   right: 20px;
+    //   background: $white;
+    //   border-radius: 2px;
+    //   box-shadow: 0 2px 4px rgba($black, 0.2);
+    //   padding: 6px 10px;
+    //   color: $dark-gray;
+    //   font-size: 10px;
+    //   font-weight: 600;
+    //   line-height: normal;
+    //   text-decoration: none;
+    //   text-transform: uppercase;
+    // }
   }
   
   &-content {
@@ -681,24 +623,6 @@ body {
       font-size: 10px;
       font-weight: 400;
     }
-  }
-}
-
-.code {
-  background: rgba($black, 0.1);
-  max-width: 600px; 
-  border-radius: 2px;
-  margin: 40px auto 100px;
-  font-family: monospace;
-  overflow: hidden;  
-  overflow-x: auto;
-  
-  &:before {
-    content: 'HTML Code';
-    display: block;
-    padding: 20px 20px 0;
-    color: $dark-gray;
-    font-weight: 600;
   }
 }
 

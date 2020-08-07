@@ -6,28 +6,19 @@
     <%= render 'layouts/meta' %>
   </head>
 
-  <body data-spy="scroll" data-offset="80" data-target="#thenavbar">
-    <%= render 'layouts/header' %>
-    
-    <!-- flash -->
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
-    <% end %>
+  <%= render 'layouts/header' %>
+  
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
+  <% end %>
 
-    <%= yield %>
+  <%= yield %>
 
-    <script>
-      $(function(){
-        $(".alert").fadeOut(5000);
-      });
-    
-      (function() {
-        this.App || (this.App = {});
-      
-        App.cable = ActionCable.createConsumer();
-      
-      }).call(this);
-    </script>
-    
+  <script>
+    $(function(){
+      $(".alert").fadeOut(2500);
+    });
+  </script>
+  
   </body>
 </html>

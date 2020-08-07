@@ -1,4 +1,4 @@
-<% if !topic.like_users.include?(current_user) %>
+<% unless topic.like_users.include?(current_user) %>
   <%= link_to likes_path(topic_id: topic.id), class: "far fa-heart like-btn", method: :post, remote: true, data: { disable_with: "" } do %>
   <% end %>
   <%= topic.like_users.count %>

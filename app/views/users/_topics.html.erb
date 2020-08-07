@@ -10,11 +10,9 @@
             </h2>
 
             <div class="descript">
-              <% if topic.password_digest.nil? %>
+              <% unless topic.password_digest %>
                 <% if topic.image.attached? %>
-                  <%= link_to topic_path(topic) do %>
-                    <%= image_tag topic.image %>
-                  <% end %>
+                  <%= link_to (image_tag topic.image), topic_path(topic) %>
                 <% end %>
 
               <% else %>
@@ -42,7 +40,7 @@
 
             <div class="descript">
               <%= link_to topic_path(topic) do %>
-                <% if topic.password_digest.nil? %>
+                <% unless topic.password_digest %>
                   <div class="topic-text">
                     <%= simple_format(topic.description) %>
                   </div>
@@ -57,6 +55,14 @@
                 </div>
               <% end %>
             </div>
+
+            <% if logged_in? %>
+              <% if topic.user_id == current_user.id %>
+              <div class="text-right" >
+                <%= link_to '削除', "#{topic.id}/destroy", method: :delete %>
+              </div>
+              <% end %>
+            <% end %>
 
           </div>
         </div>

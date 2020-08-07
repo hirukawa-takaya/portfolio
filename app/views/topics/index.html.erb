@@ -1,92 +1,87 @@
 <div class="topic-index-wrapper">
   <div class="container">
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<%= search_form_for @q do |f| %>
-  <input label="false" type="search" name="q[description_cont]" id="q_description_cont" class="fa search" placeholder="&#xF002;">
-</div>
-  
-  <div class="col-md-6 col-md-offset-3">
-  <%= form_with url: topics_path, method: :get, local: true do |f| %>
-  <%= f.select :option, [['新着順', 'new'],
-                        ['古い順', 'old'],
-                        ['いいね多い順', 'like_most'],
-                      ] %>
-  <%= f.submit "検索" %>
-  </div>
-<% end %>
-  
-<% end %>
-
-</div>
-
-  <% @results.each do |result| %>
     <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= search_form_for @q do |f| %>
+          <input label="false" type="search" name="q[description_cont]" id="q_description_cont" class="fa search" placeholder="&#xF002;">
+      </div>
+        
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_with url: topics_path, method: :get, local: true do |f| %>
+          <%= f.select :option, [['新着順', 'new'],
+                              ['古い順', 'old'],
+                              ['いいね多い順', 'like_most'],
+                            ] %>
+          <%= f.submit "検索" %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <% @topics.each do |topic| %>
+      <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="topic-index-single">
-
+  
             <h2 class="topic-author">
-              <%= link_to result.user.name, user_path(result.user.id) %>
+              <%= link_to topic.user.name, user_path(topic.user.id) %>
             </h2>
-
+  
             <div class="descript">
-              <% if result.password_digest.nil? %>
-                <% if result.image.attached? %>
-                  <%= link_to topic_path(result) do %>
-                    <%= image_tag result.image %>
-                  <% end %>
+              <% if topic.password_digest.nil? %>
+                <% if topic.image.attached? %>
+                  <%= link_to (image_tag topic.image), topic_path(topic) %>
                 <% end %>
-
+  
               <% else %>
-
-                <%= link_to "/topic_password/#{result.id}", id: result.id do %>
+  
+                <%= link_to "/topic_password/#{topic.id}", id: topic.id do %>
                   <%= image_tag "password.jpg" %>
                 <% end %>
               <% end %>
             </div>
-
-                <ul class="comments-likes">
-                  <% if logged_in? %>
-                    <%= link_to topic_path(result) do %>
-                      <li><i class="far fa-comment-dots like-btn"></i></li>
-                    <% end %>
-                    <li id="likes_buttons_<%= result.id %>"><%= render partial: 'likes/like', locals: { topic: result} %></li>
-                  <% else %>
-                    <%= link_to topic_path(result) do %>
-                      <li><i class="far fa-comment-dots like-btn"></i></li>
-                    <% end %>
-                    <li><i class="far fa-heart like-btn" ></i></li>
-                    <li class="likes-position"><%= result.like_users.count %></li>
-                  <% end %>
-                </ul>
-
+  
+            <ul class="comments-likes">
+              <% if logged_in? %>
+                <%= link_to topic_path(topic) do %>
+                  <li><i class="far fa-comment-dots like-btn"></i></li>
+                <% end %>
+                <li id="likes_buttons_<%= topic.id %>"><%= render partial: 'likes/like', locals: { topic: topic} %></li>
+              <% else %>
+                <%= link_to topic_path(topic) do %>
+                  <li><i class="far fa-comment-dots like-btn"></i></li>
+                <% end %>
+                <li><i class="far fa-heart like-btn" ></i></li>
+                <li class="likes-position"><%= topic.like_users.count %></li>
+              <% end %>
+            </ul>
+  
             <div class="descript">
-              <%= link_to topic_path(result) do %>
-                <% if result.password_digest.nil? %>
+              <%= link_to topic_path(topic) do %>
+                <% unless topic.password_digest %>
                   <div class="topic-text">
-                    <%= simple_format(result.description) %>
+                    <%= simple_format(topic.description) %>
                   </div>
                 <% else %>
                   <p class="topic-text">
-                    <%= link_to "secret", "/topic_password/#{result.id}", id: result.id %>
+                    <%= link_to "secret", "/topic_password/#{topic.id}", id: topic.id %>
                   </p>
                 <% end %>
-
+  
                 <div class="text-right" >
-                  <%= l result.created_at %>
+                  <%= l topic.created_at %>
                 </div>
               <% end %>
             </div>
-
+  
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
     <div class="col-md-6 col-md-offset-3 text-center">
-      <%= paginate @results %>
+      <%= paginate @topics %>
     </div>
-
 
   </div>
 </div>
