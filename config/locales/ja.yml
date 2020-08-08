@@ -13,13 +13,13 @@ ja:
         
   activerecord:
     attributes:
-      topic:
-        description: 投稿内容
-        
-  activerecord:
-    attributes:
       user:
         name: 名前
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワードの再確認
+        
+  activerecord:
+    attributes:
+      topic:
+        description: 投稿内容
