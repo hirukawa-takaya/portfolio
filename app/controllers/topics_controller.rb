@@ -31,7 +31,7 @@ class TopicsController < ApplicationController
     elsif params[:option] == "old"
       @topics = @q.result(distinct: true).order("created_at ASC").page(params[:page]).per(8)
     elsif params[:option] == "like_most"
-      @topics = Kaminari.paginate_array(@q.result(distinct: true).left_joins(:likes).group(:id).order(Arel.sql('COUNT(likes.id) DESC'))).page(params[:page]).per(8)
+      @topics = Kaminari.paginate_array(@q.result(distinct: true).left_joins(:likes).group(:id).order('COUNT(likes.id) DESC')).page(params[:page]).per(8)
     end
     
   end
