@@ -140,5 +140,51 @@ RSpec.describe TopicsController, type: :controller do
     end
     
   end
+  
+  describe "#destroy" do
+    context "as an authorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        @topic = FactoryBot.create(:topic)
+      end
+      
+      it "deletes a topic" do
+        log_in @topic.user
+        expect{
+          delete :destroy, params: { id: @topic.id }
+        }.to change(Topic, :count).by(-1)
+      end
+    end
+    
+    context "as an unauthorized user" do
+      before do
+        @user = FactoryBot.create(:user)
+        other_user = FactoryBot.create(:user)
+        @topic = FactoryBot.create(:topic, user: other_user)
+      end
+      # it "does not delete the topic" do
+      #   log_in @user
+      #   delete :destroy, params: { id: @topic.id }
+      #   expect(response).to_not change(@user.topics, :count)
+      # end
+      
+      it "redirects to the index" do
+      end
+    end
+    
+    context "as a gest" do
+      before do
+        @topic = FactoryBot.create(:topic)
+      end
+      
+      it "redirects to the log-in page" do
+        delete :destroy, params: { id: @topic.id }
+        expect(response).to redirect_to login_path
+      end
+      
+      it "does not delete the project" do
+      end
+    end
+  end
 
 end
