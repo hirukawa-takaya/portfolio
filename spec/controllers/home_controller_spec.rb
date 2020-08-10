@@ -4,7 +4,7 @@ RSpec.describe HomeController, type: :controller do
   describe "#top" do
     it "responsed successfully" do
       get :top
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     
     it "returns a 200resuponse" do

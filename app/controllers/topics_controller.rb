@@ -6,7 +6,6 @@ class TopicsController < ApplicationController
   
   def new
     @topic = Topic.new
-    @like = Like.new
     @password = SecureRandom.alphanumeric(6)
   end
   
@@ -25,13 +24,13 @@ class TopicsController < ApplicationController
     @q = Topic.ransack(params[:q])
     
     if params[:option] == "new" || params[:option] == nil
-      @topics = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
+      @topics = @q.result.order("created_at DESC").page(params[:page]).per(8)
     elsif params[:option] == "new"
-      @topics = @q.result(distinct: true).order("created_at DESC").page(params[:page]).per(8)
+      @topics = @q.result.order("created_at DESC").page(params[:page]).per(8)
     elsif params[:option] == "old"
-      @topics = @q.result(distinct: true).order("created_at ASC").page(params[:page]).per(8)
+      @topics = @q.result.order("created_at ASC").page(params[:page]).per(8)
     elsif params[:option] == "like_most"
-      @topics = Kaminari.paginate_array(@q.result.left_joins(:likes).group(:id).order('COUNT(likes.id) DESC')).page(params[:page]).per(8)
+      @topics = @q.result.left_joins(:likes).group(:id).order(Arel.sql('COUNT(likes.id) DESC')).page(params[:page]).per(8)
     end
     
   end

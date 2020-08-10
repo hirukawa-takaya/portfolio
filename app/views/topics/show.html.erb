@@ -23,7 +23,7 @@
           </ul>
 
           <div class="topic-text">
-            <%= simple_format(@topic.description, {}, wrapper_tag: "a") %>
+            <%= safe_join(@topic.description.split("\n"), tag(:br)) %>
           </div>
 
           <div class="created-destroy">

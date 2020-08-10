@@ -8,7 +8,7 @@ RSpec.describe SessionsController, type: :controller do
     context "as s gest" do
       it "responds successly" do
         get :new
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       
       it "returns a 200 response" do

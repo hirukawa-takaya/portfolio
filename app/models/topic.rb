@@ -1,5 +1,5 @@
 class Topic < ApplicationRecord
-  validates :description, presence:true, length:{maximum: 255}
+  validates :description, presence:true, length:{ maximum: 255 }
 
   belongs_to :user
   has_many   :likes, dependent: :destroy

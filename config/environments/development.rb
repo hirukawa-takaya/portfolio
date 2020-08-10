@@ -61,4 +61,6 @@ Rails.application.configure do
   
   #active atorage
   config.active_storage.service = :amazon
+  
+  config.web_console.whitelisted_ips = '122.26.15.2'
 end

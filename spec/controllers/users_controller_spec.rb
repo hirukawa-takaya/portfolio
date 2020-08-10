@@ -5,7 +5,7 @@ RSpec.describe UsersController, type: :controller do
     context "as a gest" do
       it "responds successly" do
         get :new
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       
       it "returns a 200 response" do
@@ -82,7 +82,7 @@ RSpec.describe UsersController, type: :controller do
     
     it "responds successly" do
       get :show, params: { id: @user.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     
     it "returns a 200 response" do
@@ -102,7 +102,7 @@ RSpec.describe UsersController, type: :controller do
       it "responds successly" do
         log_in @user
         get :edit, params: { id: @user.id }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "returns a 200 response" do

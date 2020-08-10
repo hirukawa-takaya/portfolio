@@ -45,19 +45,19 @@
 <div class="mypage-footer">
   <div id="my-topics" class="section">
     <div class="et_pb_text_inner1">
-      <%= render partial: 'topics', locals: { comments: @my_topics } %>
+      <%= render partial: 'topics', locals: { topics: @my_topics } %>
     </div>  
   </div>
   
   <div id="my-likes" class="section">
     <div class="et_pb_text_inner2">
-      <%= render partial: 'topics', locals: { comments: @my_likes } %>
+      <%= render partial: 'topics', locals: { topics: @my_likes } %>
     </div>
   </div>
   
   <div id="my-comments" class="section">
     <div class="et_pb_text_inner3">
-      <%= render partial: 'topics', locals: { comments: @my_comments } %>
+      <%= render partial: 'topics', locals: { topics: @my_comments } %>
     </div>  
   </div>
 </div>

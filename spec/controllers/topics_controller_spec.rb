@@ -10,7 +10,7 @@ RSpec.describe TopicsController, type: :controller do
       it "responds successfully" do
         log_in @user
         get :new
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       
       it "returns a 200 response" do
@@ -40,7 +40,7 @@ RSpec.describe TopicsController, type: :controller do
     
     it "responds successfully" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
     
     it "returns a 200 response" do
@@ -86,7 +86,7 @@ RSpec.describe TopicsController, type: :controller do
       end
       it "responds successfully" do
         get :topic_password, params: { id: @topic.id }
-        expect(response).to be_success
+        expect(response).to be_successful
       end
       
       it "returns a 200 response" do
@@ -120,7 +120,7 @@ RSpec.describe TopicsController, type: :controller do
     describe "without a password" do
       it "responds successfully" do
         get :show, params: { id: @topic.id }
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       
       it "returns a 200 response" do
@@ -144,7 +144,6 @@ RSpec.describe TopicsController, type: :controller do
   describe "#destroy" do
     context "as an authorized user" do
       before do
-        @user = FactoryBot.create(:user)
         @topic = FactoryBot.create(:topic)
       end
       
@@ -158,17 +157,20 @@ RSpec.describe TopicsController, type: :controller do
     
     context "as an unauthorized user" do
       before do
-        @user = FactoryBot.create(:user)
-        other_user = FactoryBot.create(:user)
-        @topic = FactoryBot.create(:topic, user: other_user)
+        @topic = FactoryBot.create(:topic)
+        @other_topic = FactoryBot.create(:topic, :other_topic)
       end
-      # it "does not delete the topic" do
-      #   log_in @user
-      #   delete :destroy, params: { id: @topic.id }
-      #   expect(response).to_not change(@user.topics, :count)
-      # end
+      it "does not delete the topic" do
+        log_in @topic.user
+        expect{
+        delete :destroy, params: { id: @other_topic.id }
+        }.to_not change(Topic, :count)
+      end
       
       it "redirects to the index" do
+        log_in @topic.user
+        delete :destroy, params: { id: @other_topic.id }
+        expect(response).to redirect_to root_path
       end
     end
     
@@ -177,13 +179,17 @@ RSpec.describe TopicsController, type: :controller do
         @topic = FactoryBot.create(:topic)
       end
       
+      it "does not delete the topic" do
+        expect{
+          delete :destroy, params: { id: @topic.id }
+        }.to_not change(Topic, :count)
+      end
+      
       it "redirects to the log-in page" do
         delete :destroy, params: { id: @topic.id }
         expect(response).to redirect_to login_path
       end
       
-      it "does not delete the project" do
-      end
     end
   end
 
