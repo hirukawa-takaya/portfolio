@@ -1,0 +1,27 @@
+<div class="topic-index-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= search_form_for @q, remote: true do |f| %>
+          <input label="false" type="search" name="q[description_cont]" id="q_description_cont" class="fa search" placeholder="&#xF002;">
+      </div>
+        
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_with url: topics_path, method: :get do |f| %>
+          <select name="option">
+            <option value="new">新着順</option>
+            <option value="old">古い順</option>
+            <option value="like_most">いいね多い順</option>
+          </select>
+          <%= f.submit "検索" %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  
+    <div id="search-area">
+      <%= render "search" %>
+    </div>
+    
+  </div>
+</div>

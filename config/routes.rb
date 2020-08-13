@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get       'topic_password/:id', to: 'topics#topic_password'
   post      'topic_password/:id', to: 'topics#authenticate'
   delete    'topics/:id/destroy', to: 'topics#destroy'
+  get       'topics/index'     , to: 'topics#search'
   
   post      '/likes',      to: 'likes#create'
   delete    '/likes',      to: 'likes#destroy'

@@ -22,15 +22,21 @@ class TopicsController < ApplicationController
   def index
     @user = Topic.find_by(user_id: params[:user_id])
     @q = Topic.ransack(params[:q])
+    @topics = @q.result.order("created_at DESC").page(params[:page]).per(8)
     
-    if params[:option] == "new" || params[:option] == nil
-      @topics = @q.result.order("created_at DESC").page(params[:page]).per(8)
+    if params[:page]
+      render "search"
     elsif params[:option] == "new"
       @topics = @q.result.order("created_at DESC").page(params[:page]).per(8)
+       render "search"
     elsif params[:option] == "old"
       @topics = @q.result.order("created_at ASC").page(params[:page]).per(8)
+      render "search"
     elsif params[:option] == "like_most"
       @topics = @q.result.left_joins(:likes).group(:id).order(Arel.sql('COUNT(likes.id) DESC')).page(params[:page]).per(8)
+      render "search"
+    else
+      render "search"
     end
     
   end
