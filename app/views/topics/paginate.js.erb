@@ -1,9 +1,1 @@
 $("#paginate-area").html("<%= j(render partial: 'paginate') %>");
-$(document).ready(function() {
-  var pagetop = $('#paginate-area');
-  pagetop.html("<%= j(render partial: 'paginate') %>");
-       pagetop.click(function () {
-           $('body, html').animate({ scrollTop: 0 }, 500);
-              return false;
-   });
-});

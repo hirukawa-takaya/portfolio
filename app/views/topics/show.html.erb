@@ -23,7 +23,7 @@
           </ul>
 
           <div class="topic-text">
-            <%= safe_join(@topic.description.split("\n"), tag(:br)) %>
+            <a><%= safe_join(@topic.description.split("\n"), tag(:br)) %></a>
           </div>
 
           <div class="created-destroy">

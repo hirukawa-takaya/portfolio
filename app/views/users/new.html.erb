@@ -26,6 +26,9 @@
           <div class="form-group">
             <%= f.label :password %>
             <%= f.password_field :password, class: 'form-control' %>
+            <div class="password-eye">
+              <span class="fas fa-eye-slash"></span>
+            </div>
           </div>
           <%= f.submit "登録", class: 'btn-block' %>
         <% end %>
@@ -33,3 +36,28 @@
     </div>
   </div>
 </div>
+
+<script>
+  function eyeslashClick(){
+    $(".fa-eye-slash").on("click", function(){
+      $(".fa-eye").off("click")
+      let input = $(this).parents(".form-group").find("input");
+      input.attr("type", "text");
+      $(this).removeClass();
+      $(this).addClass("fas fa-eye");
+      eyeClick();
+    });
+  }
+  function eyeClick(){
+    $(".fa-eye").on("click", function(){
+      $(".fa-eye-slash").off("click")
+      let input = $(this).parents(".form-group").find("input");
+      input.attr("type", "password");
+      $(this).removeClass();
+      $(this).addClass("fas fa-eye-slash");
+      eyeslashClick();
+    });
+  }
+  eyeslashClick();
+  eyeClick();
+</script>
