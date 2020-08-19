@@ -1,7 +1,0 @@
-<%= form_with url: {controller: 'topics', action: 'show' }, method: :get, local: true do |f| %>
-  <div class="form-group">
-    <%= f.text_field :share, placeholder: "送信先のメールアドレス", class: 'form-control', id: "share-text-field" %>
-    <%= hidden_field_tag :pass, @topic.password_digest %>
-  </div>
- <%= f.submit "送信", class: 'btn-block', id: 'share-submit-btn' %>
-<% end %>

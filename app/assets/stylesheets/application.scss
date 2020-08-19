@@ -508,4 +508,31 @@ input[type="search"] {
   margin-top: -26px;
   position: relative;
   z-index: 2;
-    }
+}
+
+#menu div {
+  position: relative;
+}
+
+.arrow_box {
+  display: none;
+  position: absolute;
+  padding: 10px;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+}
+
+.arrow_box:after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  border: solid transparent;
+  border-bottom-color: #333;
+  border-width: 10px;
+  pointer-events: none;
+  content: " ";
+}
