@@ -20,6 +20,10 @@
               <li><i class="far fa-heart like-btn" ></i></li>
               <li class="likes-position"><%= @topic.like_users.count %></li>
             <% end %>
+            <li><i class="far fa-share-square like-btn share-btn"></i></li>
+            <div id="share-field">
+              <%= render partial: 'email_field' %>
+            </div>
           </ul>
 
           <div class="topic-text">
@@ -61,3 +65,13 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function(){
+  $('#share-field').hide();
+  
+  $('.share-btn').on('click',function(){   
+    $('#share-field').toggle();
+  });
+});
+</script>

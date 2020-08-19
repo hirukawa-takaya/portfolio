@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      UserMailer.complete_mail(@user).deliver_now
       log_in @user
       redirect_to root_path, success: "新規登録しました"
     else

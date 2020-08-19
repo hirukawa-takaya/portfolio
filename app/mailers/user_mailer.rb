@@ -1,9 +1,9 @@
 class UserMailer < ApplicationMailer
-  default from: 'portfoliomailer5@gmail.com'
+  default from: 'no-replay@gmail.com'
 
-  def complete_mail(user)
-    @user = user
-    @url = "http://localhost:3000/users/#{@user.id}"
-    mail(subject: "COMPLETE join your address" ,to: @user.email)
+  def complete_mail
+    @share = params[:share]
+    @url = params[:url]
+    mail(subject: "#リンクが届きました" ,to: @share )
   end
 end

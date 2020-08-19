@@ -58,6 +58,14 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @comment = Comment.new
     @comments = @topic.comments
+    @url = request.referer
+    @share = params[:share]
+    
+    if @share
+      redirect_to topic_path(@topic, parameter: @topic.password_digest)
+      UserMailer.with(share: @share, url: @url).complete_mail.deliver_later
+    end
+    
   end
   
   def destroy
