@@ -56,10 +56,12 @@
               <% end %>
             </div>
 
+              <% if logged_in? %>
               <% if topic.user_id == current_user.id %>
-                <div class="text-right" >
+                <div class="text-right">
                   <%= link_to '削除', "/topics/#{topic.id}/destroy", method: :delete %>
                 </div>
+              <% end %>
               <% end %>
 
           </div>
