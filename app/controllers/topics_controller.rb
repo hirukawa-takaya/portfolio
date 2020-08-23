@@ -58,12 +58,22 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @comment = Comment.new
     @comments = @topic.comments
-    @url = request.referer
-    @share = params[:share]
+  end
     
-    if @share
-      redirect_to topic_path(@topic, parameter: @topic.password_digest)
-      UserMailer.with(share: @share, url: @url).complete_mail.deliver_later
+  def send_mail
+    @topic = Topic.find(params[:id])
+    @comment = Comment.new
+    @comments = @topic.comments
+    @share = Share.new
+    @share.share = params[:share]
+    @share.pass = params[:pass]
+    
+    if @share.valid?
+      redirect_to topic_path(@topic, parameter: @topic.password_digest), success: '送信しました'
+      UserMailer.with(share: @share.share, url: @url).complete_mail.deliver_later
+    else
+      flash.now[:danger] = '失敗しました'
+      render :show
     end
     
   end
